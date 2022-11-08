@@ -13,9 +13,8 @@ public class MainController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		request
-			.getRequestDispatcher("/WEB-INF/views/main/index.jsp");
+			.getRequestDispatcher("/WEB-INF/views/main/index.jsp")
 			.forward(request, response);
-			//rd.forward(request, response);
 	}
 
 	

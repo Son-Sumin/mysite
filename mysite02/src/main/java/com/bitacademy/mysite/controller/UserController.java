@@ -61,8 +61,22 @@ public class UserController extends HttpServlet {
 			// 다 수정되면 response.sendRedirect("/mysite02/user?a=updateform")
 			
 			request
-			.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp")
-			.forward(request, response);
+				.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp")
+				.forward(request, response);
+			
+		} else if("update".equals(action)) {
+			String name = request.getParameter("name");
+			String password = request.getParameter("password");
+			String gender = request.getParameter("gender");
+			
+			UserVo vo = new UserVo();
+			vo.setName(name);
+			vo.setPassword(password);
+			vo.setGender(gender);
+
+			new UserDao().insert(vo);
+
+			response.sendRedirect(request.getContextPath() + "/user?a=updatesuccess");
 			
 		} else if("loginform".equals(action)) {
 			request

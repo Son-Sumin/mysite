@@ -27,7 +27,7 @@ public class UserDao {
 			String sql = " select no, name from user where email=? and password=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
-			pstmt.setString(1, password);
+			pstmt.setString(2, password);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {

@@ -24,7 +24,7 @@ public class UserController extends HttpServlet {
 				.getRequestDispatcher("/WEB-INF/views/user/joinform.jsp")
 				.forward(request, response);
 			
-		}  else if("join".equals(action)) {
+		}  else if("join".equals(action)){
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
@@ -35,9 +35,9 @@ public class UserController extends HttpServlet {
 			vo.setEmail(email);
 			vo.setPassword(password);
 			vo.setGender(gender);
-			
+
 			new UserDao().insert(vo);
-			
+
 			response.sendRedirect(request.getContextPath() + "/user?a=joinsuccess");
 			
 		} else if("joinsuccess".equals(action)) {

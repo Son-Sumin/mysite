@@ -45,6 +45,25 @@ public class UserController extends HttpServlet {
 			.getRequestDispatcher("/WEB-INF/views/user/joinsuccess.jsp")
 			.forward(request, response);
 			
+		} else if("updateform".equals(action)) {
+			//// Access Control
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)request.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+				return;
+			}
+			////
+			
+			// 과제
+			// UserVo vo = new UserDao().findByNo(authUser.getNo());
+			// request.setAttribute("userVo", vo);
+			// 다 수정되면 response.sendRedirect("/mysite02/user?a=updateform")
+			
+			request
+			.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp")
+			.forward(request, response);
+			
 		} else if("loginform".equals(action)) {
 			request
 			.getRequestDispatcher("/WEB-INF/views/user/loginform.jsp")
@@ -64,7 +83,6 @@ public class UserController extends HttpServlet {
 				.forward(request, response);
 				return;
 			}
-			
 			/* 로그인 처리 */
 			// SessionFilter가 요청 당한 JSESSIONID가 없으면 만들어 달라고 답변함.
 			// Session Manager가 JSESSIONID와 HttpSession mapping 시켜준다.
@@ -72,6 +90,15 @@ public class UserController extends HttpServlet {
 			HttpSession session = request.getSession(true);  // 없으면 null 처리, true면 만들어서 준다
 			session.setAttribute("authUser", authUser);
 			
+			response.sendRedirect(request.getContextPath());
+		} else if("logout".equals(action)) {
+			HttpSession session = request.getSession();
+			if(session != null) {
+				session.removeAttribute("authUser");
+				session.invalidate();
+			}
+			response.sendRedirect(request.getContextPath());
+		} else {
 			response.sendRedirect(request.getContextPath());
 		}
 	}

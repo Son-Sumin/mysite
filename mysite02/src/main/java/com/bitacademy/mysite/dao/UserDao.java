@@ -9,7 +9,11 @@ import java.sql.SQLException;
 import com.bitacademy.mysite.vo.UserVo;
 
 public class UserDao {
-	
+	public boolean update(UserVo vo) {
+		boolean result = false;
+		
+		return result;
+	}
 	public UserVo findByEmailAndPassword(String email, String password) {
 		UserVo result = null;
 		

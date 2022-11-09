@@ -19,7 +19,7 @@ public class UserDao {
 		try {
 			conn = getConnection();
 
-			String sql = " update user set name=?, gender=? where no=?";
+			String sql = " update user set name=?, gender=? where no=null";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getName());
@@ -39,6 +39,50 @@ public class UserDao {
 				}
 				if (conn != null)
 					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public UserVo findByNo(Long no) {
+		UserVo result = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = " select no, name, email from user where no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				//Long no = rs.getLong(1);
+				String name = rs.getString(2);
+				String email = rs.getString(3);
+				
+				
+				result = new UserVo();
+				//result.setNo(no);
+				result.setName(name);
+				result.setEmail(email);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

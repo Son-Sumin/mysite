@@ -57,7 +57,7 @@ public class UserController extends HttpServlet {
 			
 			// 과제
 			// UserVo vo = new UserDao().findByNo(authUser.getNo());
-			// request.setAttribute("userVo", vo);
+			// request.setAttribute("UserVo", vo);
 			// 다 수정되면 response.sendRedirect("/mysite02/user?a=updateform")
 			
 			request
@@ -66,7 +66,6 @@ public class UserController extends HttpServlet {
 			
 		} else if("update".equals(action)) {
 			String name = request.getParameter("name");
-			//String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String gender = request.getParameter("gender");
 			
@@ -105,9 +104,9 @@ public class UserController extends HttpServlet {
 				return;
 			}
 			/* 로그인 처리 */
-			// SessionFilter가 요청 당한 JSESSIONID가 없으면 만들어 달라고 답변함.
-			// Session Manager가 JSESSIONID와 HttpSession mapping 시켜준다.
-			// HttpSession 안에 객체 존재
+					/* SessionFilter가 요청 당한 JSESSIONID가 없으면 만들어 달라고 답변함.
+					 Session Manager가 JSESSIONID와 HttpSession mapping 시켜준다.
+					HttpSession 안에 객체 존재 */
 			HttpSession session = request.getSession(true);  // 없으면 null 처리, true면 만들어서 준다
 			session.setAttribute("authUser", authUser);
 			

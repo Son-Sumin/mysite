@@ -47,12 +47,12 @@ public class UserController extends HttpServlet {
 			
 		} else if("updateform".equals(action)) {
 			//// Access Control
-			HttpSession session = request.getSession();
-			UserVo authUser = (UserVo)request.getAttribute("authUser");
-			if(authUser == null) {
-				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-				return;
-			}
+//			HttpSession session = request.getSession();
+//			UserVo authUser = (UserVo)request.getAttribute("authUser");
+//			if(authUser == null) {
+//				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+//				return;
+//			}
 			////
 			
 			// 과제
@@ -66,22 +66,30 @@ public class UserController extends HttpServlet {
 			
 		} else if("update".equals(action)) {
 			String name = request.getParameter("name");
+			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String gender = request.getParameter("gender");
 			
 			UserVo vo = new UserVo();
 			vo.setName(name);
+			vo.setEmail(email);
 			vo.setPassword(password);
 			vo.setGender(gender);
 
-			new UserDao().insert(vo);
+			new UserDao().update(vo);
 
 			response.sendRedirect(request.getContextPath() + "/user?a=updatesuccess");
 			
+		} else if("updatesuccess".equals(action)) {
+			request
+			.getRequestDispatcher("/WEB-INF/views/user/updatesuccess.jsp")
+			.forward(request, response);
+			
+			
 		} else if("loginform".equals(action)) {
 			request
-			.getRequestDispatcher("/WEB-INF/views/user/loginform.jsp")
-			.forward(request, response);
+				.getRequestDispatcher("/WEB-INF/views/user/loginform.jsp")
+				.forward(request, response);
 			
 		} else if("login".equals(action)) {
 			String email = request.getParameter("email");
@@ -93,8 +101,8 @@ public class UserController extends HttpServlet {
 				/* 인증 실패 */
 				request.setAttribute("email", email);
 				request
-				.getRequestDispatcher("/WEB-INF/views/user/loginform.jsp")
-				.forward(request, response);
+					.getRequestDispatcher("/WEB-INF/views/user/loginform.jsp")
+					.forward(request, response);
 				return;
 			}
 			/* 로그인 처리 */
@@ -105,6 +113,7 @@ public class UserController extends HttpServlet {
 			session.setAttribute("authUser", authUser);
 			
 			response.sendRedirect(request.getContextPath());
+			
 		} else if("logout".equals(action)) {
 			HttpSession session = request.getSession();
 			if(session != null) {
@@ -117,8 +126,8 @@ public class UserController extends HttpServlet {
 		}
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

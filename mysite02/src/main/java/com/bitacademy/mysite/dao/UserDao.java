@@ -31,7 +31,10 @@ public class UserDao {
 				String name = rs.getString(2);
 				
 				result = new UserVo();
+				result.setNo(no);
+				result.setName(name);
 			}
+			
 		} catch (SQLException e) {
 			System.out.println("Error:" + e);
 		} finally {
@@ -45,6 +48,7 @@ public class UserDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
 		return result;
 	}
 	

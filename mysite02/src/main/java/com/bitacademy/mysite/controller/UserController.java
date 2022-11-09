@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bitacademy.mysite.dao.UserDao;
 import com.bitacademy.mysite.vo.UserVo;
@@ -65,7 +66,11 @@ public class UserController extends HttpServlet {
 			}
 			
 			/* 로그인 처리 */
-			
+			// SessionFilter가 요청 당한 JSESSIONID가 없으면 만들어 달라고 답변함.
+			// Session Manager가 JSESSIONID와 HttpSession mapping 시켜준다.
+			// HttpSession 안에 객체 존재
+			HttpSession session = request.getSession(true);  // 없으면 null 처리, true면 만들어서 준다
+			session.setAttribute("authUser", authUser);
 			
 			response.sendRedirect(request.getContextPath());
 		}

@@ -19,12 +19,22 @@ public class UserDao {
 		try {
 			conn = getConnection();
 
-			String sql = " update user set name=?, gender=? where no=null";
+			if("".equals(vo.getPassword())) {
+			String sql = " update user set name=?, gender=? where no=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getGender());
 			pstmt.setLong(3, vo.getNo());
+			} else {
+				String sql = " update user set name=?, password=?, gender=? where no=?";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getPassword());
+				pstmt.setString(3, vo.getGender());
+				pstmt.setLong(4, vo.getNo());
+			}
 			
 			int count = pstmt.executeUpdate();
 		
@@ -56,21 +66,20 @@ public class UserDao {
 		try {
 			conn = getConnection();
 			
-			String sql = " select no, name, email from user where no=?";
+			String sql = " select name, email,gender from user where no=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, no);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				//Long no = rs.getLong(1);
-				String name = rs.getString(2);
-				String email = rs.getString(3);
-				
+				String name = rs.getString(1);
+				String email = rs.getString(2);
+				String gender = rs.getString(3);
 				
 				result = new UserVo();
-				//result.setNo(no);
 				result.setName(name);
 				result.setEmail(email);
+				result.setGender(gender);
 			}
 			
 		} catch (SQLException e) {

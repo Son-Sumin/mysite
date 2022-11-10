@@ -47,36 +47,47 @@ public class UserController extends HttpServlet {
 			
 		} else if("updateform".equals(action)) {
 			//// Access Control
-//			HttpSession session = request.getSession();
-//			UserVo authUser = (UserVo)request.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-//				return;
-//			}
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+				return;
+			}
 			////
 			
-			// 과제
-			// UserVo vo = new UserDao().findByNo(authUser.getNo());
-			// request.setAttribute("UserVo", vo);
-			// 다 수정되면 response.sendRedirect("/mysite02/user?a=updateform")
+			 UserVo vo = new UserDao().findByNo(authUser.getNo());
+			 request.setAttribute("userVo", vo);
 			
 			request
 				.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp")
 				.forward(request, response);
 			
 		} else if("update".equals(action)) {
+			//// Access Control
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+				return;
+			}
+			////
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String gender = request.getParameter("gender");
 			
 			UserVo vo = new UserVo();
+			vo.setNo(authUser.getNo());
 			vo.setName(name);
 			vo.setPassword(password);
 			vo.setGender(gender);
 
+			// update db
 			new UserDao().update(vo);
+			
+			// update session
+			authUser.setName(name);
 
-			response.sendRedirect(request.getContextPath() + "/user?a=updatesuccess");
+			response.sendRedirect(request.getContextPath() + "/user?a=updateform");
 			
 		} else if("updatesuccess".equals(action)) {
 			request

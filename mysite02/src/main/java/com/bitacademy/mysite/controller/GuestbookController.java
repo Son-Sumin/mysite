@@ -24,30 +24,35 @@ public class GuestbookController extends HttpServlet {
 		String action = request.getParameter("a");
 		
 		if("deleteform".equals(action)) {
-			//// Access Control
-			HttpSession session = request.getSession();
-			UserVo authUser = (UserVo)session.getAttribute("authUser");
-			if(authUser == null) {
-				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
-				return;
-			}
-					////
+//			//// Access Control
+//			HttpSession session = request.getSession();
+//			UserVo authUser = (UserVo)session.getAttribute("authUser");
+//			if(authUser == null) {
+//				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
+//				return;
+//			}
+//					////
 			request
 			.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp")
 			.forward(request, response);
+			
+		} else if("delete".equals(action)) {
+			String no = request.getParameter("no");
+			String password = request.getParameter("password");
+			
+			new GuestbookDao().deleteByNoAndPassword(Long.parseLong(no), password);
 
-//			UserVo vo = new UserDao().!!findByNo(authUser.getNo());
-//			request.setAttribute("userVo", vo);
+			response.sendRedirect(request.getContextPath() + "/guestbook");
 
 		}  else if("insert".equals(action)) {
-			//// Access Control
-			HttpSession session = request.getSession();
-			UserVo authUser = (UserVo)session.getAttribute("authUser");
-			if(authUser == null) {
-				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-				return;
-			}
-			////		
+//			//// Access Control
+//			HttpSession session = request.getSession();
+//			UserVo authUser = (UserVo)session.getAttribute("authUser");
+//			if(authUser == null) {
+//				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+//				return;
+//			}
+//			////		
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String contents = request.getParameter("contents");
@@ -59,20 +64,11 @@ public class GuestbookController extends HttpServlet {
 			
 			new GuestbookDao().insert(vo);
 			
-			authUser.setName(name);
+//			authUser.setName(name);
+//			request.setAttribute("guestbookVo", vo);
 			
-			request.setAttribute("guestbookVo", vo);
-			
-			response.sendRedirect(request.getContextPath() + "/guestbook?a=list");
-			
-		} else if("delete".equals(action)) {
-			String no = request.getParameter("no");
-			String password = request.getParameter("password");
-			
-			new GuestbookDao().deleteByNoAndPassword(Long.parseLong(no), password);
-
-			response.sendRedirect(request.getContextPath() + "/gb");
-			
+			response.sendRedirect(request.getContextPath() + "/guestbook");
+						
 		} else {
 			List<GuestbookVo> list = new GuestbookDao().findAll();
 			

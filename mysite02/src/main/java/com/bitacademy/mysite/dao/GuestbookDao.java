@@ -99,7 +99,7 @@ public class GuestbookDao {
 		return result;
 	}
 	
-	public Boolean deleteByNoandPassword(Long no, String password) {
+	public Boolean deleteByNoAndPassword(Long no, String password) {
 		boolean result = false;
 		
 		Connection conn = null;  
@@ -147,6 +147,12 @@ public class GuestbookDao {
 			System.out.println("드라이버 로딩 실패: " + e);
 		}
 		return conn;
+	}
+
+
+	public void deleteByNoAndPassword(long parseLong, String password) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

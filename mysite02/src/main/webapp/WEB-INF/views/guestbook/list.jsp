@@ -22,7 +22,7 @@
 					<table>
 						<tr>
 							<td>이름</td><td><input type="text" name="name"></td>
-							<td>비밀번호</td><td><input type="password" name="pass"></td>
+							<td>비밀번호</td><td><input type="password" name="password"></td>
 						</tr>
 						<tr>
 							<td colspan=4><textarea name="content" id="content"></textarea></td>
@@ -33,16 +33,12 @@
 					</table>
 				</form>
 				<ul>
-					<li>
-					
-					<c:set var='count' value='${fn:length(list) }' />
-						for(GuestbookVo vo:list) {
-				
+					<li>	
 						<table>
+							<c:set var='count' value='${fn:length(list) }' />
+							<c:forEach items='${list }' var='guestbookVo' varStatus='status'>
 							<tr>
-								<c:forEach begin='${fn:length(list) }' end='1' step='1' var='count'>
-									<td>[${count }]</td>
-								</c:forEach>
+								<td>[${count-status.index }]</td>
 								<td>${guestbookVo.name }</td>
 								<td>${guestbookVo.regDate }</td>
 								<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${guestbookVo.no }">삭제</a></td>
@@ -52,6 +48,7 @@
 									${fn:replace(guestbookVo.contents, newline, "<br/>") }
 								</td>
 							</tr>
+							</c:forEach>
 						</table>
 						<br>
 					</li>

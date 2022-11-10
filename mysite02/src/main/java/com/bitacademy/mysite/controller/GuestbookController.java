@@ -1,7 +1,9 @@
 package com.bitacademy.mysite.controller;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,31 +24,22 @@ public class GuestbookController extends HttpServlet {
 		String action = request.getParameter("a");
 		
 		if("deleteform".equals(action)) {
+			//// Access Control
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
+				return;
+			}
+					////
 			request
 			.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp")
 			.forward(request, response);
-//			//// Access Control
-//			HttpSession session = request.getSession();
-//			UserVo authUser = (UserVo)session.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
-//				return;
-//			}
-//			////
-//			
+
 //			UserVo vo = new UserDao().!!findByNo(authUser.getNo());
 //			request.setAttribute("userVo", vo);
-//			
-//			request
-//				.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp")
-//				.forward(request, response);
-			
-		} else if("list".equals(action)) {
-			request
-			.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp")
-			.forward(request, response);
-			
-		} else if("insert".equals(action)) {
+
+		}  else if("insert".equals(action)) {
 			//// Access Control
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo)session.getAttribute("authUser");
@@ -54,8 +47,7 @@ public class GuestbookController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "user?a=loginform");
 				return;
 			}
-			////
-			
+			////		
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String contents = request.getParameter("contents");
@@ -73,6 +65,21 @@ public class GuestbookController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath() + "/guestbook?a=list");
 			
+		} else if("delete".equals(action)) {
+			String no = request.getParameter("no");
+			String password = request.getParameter("password");
+			
+			new GuestbookDao().deleteByNoAndPassword(Long.parseLong(no), password);
+
+			response.sendRedirect(request.getContextPath() + "/gb");
+			
+		} else {
+			List<GuestbookVo> list = new GuestbookDao().findAll();
+			
+			request.setAttribute("list", list);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp");
+			rd.forward(request, response);
 		}
 	}
 	

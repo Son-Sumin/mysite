@@ -26,6 +26,7 @@ public class UserDao {
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getGender());
 			pstmt.setLong(3, vo.getNo());
+			
 			} else {
 				String sql = " update user set name=?, password=?, gender=? where no=?";
 				pstmt = conn.prepareStatement(sql);

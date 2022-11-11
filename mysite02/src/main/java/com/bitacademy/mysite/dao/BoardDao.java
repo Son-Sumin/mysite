@@ -10,8 +10,7 @@ import java.util.List;
 
 import com.bitacademy.mysite.vo.GuestbookVo;
 
-public class GuestbookDao {
-
+public class BoardDao {
 	public Boolean insert(GuestbookVo vo) {
 		boolean result = false;
 		
@@ -148,5 +147,4 @@ public class GuestbookDao {
 		}
 		return conn;
 	}
-	
 }

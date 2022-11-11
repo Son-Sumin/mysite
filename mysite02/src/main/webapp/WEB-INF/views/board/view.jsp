@@ -33,12 +33,12 @@
 						</td>
 					</tr>
 				</table>
-				<!-- authUser not empty 로그인시만 보이기 -->
 				<!-- authUser no와 userVo no 같게 하기 -->
 				<!-- /board?a=view$no=10 -->
 				<div class="bottom">
 					<a href="">글목록</a>
-					<a href="">글수정</a>
+					<a href="">글수정</a>  <!-- authUser not empty 로그인시만 보이기+자기글만 -->
+					<a href="">답글</a>  <!-- authUser not empty 로그인시만 보이기 -->
 				</div>
 			</div>
 		</div>

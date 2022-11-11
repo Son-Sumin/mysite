@@ -1,20 +1,22 @@
 package com.bitacademy.mysite.vo;
 
 public class BoardVo {
-	private int no;
+	private long no;
 	private String title;
 	private String contents;
-	private int hit;
+	private long hit;
 	private String regDate;
-	private int groupNo;
-	private int orderNo;
-	private int depth;
-	private int userNo;
+	private long groupNo;
+	private long orderNo;
+	private long depth;
+	private long userNo;
+	private String name;
+	private String password;
 	
-	public int getNo() {
+	public long getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(long no) {
 		this.no = no;
 	}
 	public String getTitle() {
@@ -29,10 +31,10 @@ public class BoardVo {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getHit() {
+	public long getHit() {
 		return hit;
 	}
-	public void setHit(int hit) {
+	public void setHit(long hit) {
 		this.hit = hit;
 	}
 	public String getRegDate() {
@@ -41,34 +43,46 @@ public class BoardVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public int getGroupNo() {
+	public long getGroupNo() {
 		return groupNo;
 	}
-	public void setGroupNo(int groupNo) {
+	public void setGroupNo(long groupNo) {
 		this.groupNo = groupNo;
 	}
-	public int getOrderNo() {
+	public long getOrderNo() {
 		return orderNo;
 	}
-	public void setOrderNo(int orderNo) {
+	public void setOrderNo(long orderNo) {
 		this.orderNo = orderNo;
 	}
-	public int getDepth() {
+	public long getDepth() {
 		return depth;
 	}
-	public void setDepth(int depth) {
+	public void setDepth(long depth) {
 		this.depth = depth;
 	}
-	public int getUserNo() {
+	public long getUserNo() {
 		return userNo;
 	}
-	public void setUserNo(int userNo) {
+	public void setUserNo(long userNo) {
 		this.userNo = userNo;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", regDate="
 				+ regDate + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
-				+ "]";
+				+ ", name=" + name + ", password=" + password + "]";
 	}
 }

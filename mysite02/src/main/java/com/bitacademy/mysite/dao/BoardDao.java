@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bitacademy.mysite.vo.BoardVo;
-import com.bitacademy.mysite.vo.GuestbookVo;
 
 public class BoardDao {
 	public Boolean insert(BoardVo vo) {
@@ -28,12 +27,11 @@ public class BoardDao {
 
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
-			//pstmt.setString(3, vo.getRegDate());
 			pstmt.setLong(3, vo.getUserNo());
 			
 			} else {
 				String sql = 
-						" insert into board values(null, ?, ?, '1', date_format(now(), '%Y/%m/%d %H:%i:%s'), max(?)+1, '1', '0', ?)";
+						" insert into board values(null, ?, ?, '1', date_format(now(), '%Y/%m/%d %H:%i:%s'), max(?) as maxGroupNo +1, '1', '0', ?)";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());
@@ -76,24 +74,40 @@ public class BoardDao {
 			conn = getConnection();
 
 			String sql = 
-					" select no, name, contents, date_format(reg_date, '%Y/%m/%d %H:%i:%s')" + 
-					" from board order by reg_date desc";
+					" select no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s')," +
+					" group_no, order_no, depth, user_no, name, password" + 
+					" order by group_no desc, order_no asc";
 			pstmt = conn.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Long no = rs.getLong(1);
-				String name = rs.getString(2);
+				String title = rs.getString(2);
 				String contents = rs.getString(3);
-				String regDate = rs.getString(4);
+				Long hit = rs.getLong(4);
+				String regDate = rs.getString(5);
+				Long groupNo = rs.getLong(6);
+				Long orderNo = rs.getLong(7);
+				Long depth = rs.getLong(8);
+				Long userNo = rs.getLong(9);
+				String name = rs.getString(10);
+				String password = rs.getString(11);
 
-				GuestbookVo vo = new GuestbookVo();
+				BoardVo vo = new BoardVo();
 				vo.setNo(no);
-				vo.setName(name);
+				vo.setTitle(title);
 				vo.setContents(contents);
 				vo.setRegDate(regDate);
+				vo.setHit(hit);
+				vo.setRegDate(regDate);
+				vo.setGroupNo(groupNo);
+				vo.setOrderNo(orderNo);
+				vo.setDepth(depth);
+				vo.setUserNo(userNo);
+				vo.setName(name);
+				vo.setPassword(password);
 
-				//result.add(vo);
+				result.add(vo);
 			}
 
 		} catch (SQLException e) {
@@ -115,7 +129,7 @@ public class BoardDao {
 		return result;
 	}
 	
-	public Boolean deleteByNoAndPassword(Long no, String password) {
+	public Boolean deleteByNo(Long no) {
 		boolean result = false;
 		
 		Connection conn = null;  
@@ -124,10 +138,9 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			
-			String sql = " delete from board where no = ? and password = ?";
+			String sql = " delete from board where no = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, no);
-			pstmt.setString(2, password);
 			
 			int count = pstmt.executeUpdate();
 

@@ -34,27 +34,43 @@ public class BoardController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath() + "/board");
 						
-		} else if("deleteform".equals(action)) {
-//			//// Access Control
-//			HttpSession session = request.getSession();
-//			UserVo authUser = (UserVo)session.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
-//				return;
-//			}
-//					////
-			request
-			.getRequestDispatcher("/WEB-INF/views/board/deleteform.jsp")
-			.forward(request, response);
+//		} else if("deleteform".equals(action)) {
+////			//// Access Control
+////			HttpSession session = request.getSession();
+////			UserVo authUser = (UserVo)session.getAttribute("authUser");
+////			if(authUser == null) {
+////				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
+////				return;
+////			}
+////					////
+//			request
+//			.getRequestDispatcher("/WEB-INF/views/board/deleteform.jsp")
+//			.forward(request, response);
 			
 		} else if("delete".equals(action)) {
-			String no = request.getParameter("no");
-			String password = request.getParameter("password");
-			new GuestbookDao().deleteByNoAndPassword(Long.parseLong(no), password);
+			String sno = request.getParameter("no");
+			Long no = Long.parseLong(sno);
+			
+			new BoardDao().deleteByNo(no);
 
 			response.sendRedirect(request.getContextPath() + "/board");
 
-		}else {
+		} else if ("view".equals(action)) {
+			request
+			.getRequestDispatcher("/WEB-INF/views/board/view.jsp")
+			.forward(request, response);
+			
+		} else if ("modify".equals(action)) {
+			request
+			.getRequestDispatcher("/WEB-INF/views/board/modify.jsp")
+			.forward(request, response);
+			
+		}  else if ("reply".equals(action)) {
+			request
+			.getRequestDispatcher("/WEB-INF/views/board/reply.jsp")
+			.forward(request, response);
+			
+		} else {
 			request
 				.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
 				.forward(request, response);
@@ -62,7 +78,6 @@ public class BoardController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -1,12 +1,15 @@
 package com.bitacademy.mysite.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bitacademy.mysite.dao.BoardDao;
 import com.bitacademy.mysite.dao.GuestbookDao;
+import com.bitacademy.mysite.vo.BoardVo;
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -14,8 +17,23 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("a");
 		
-		if("writeform".equals(action)) {
+		if("write".equals(action)) {
+			request
+			.getRequestDispatcher("/WEB-INF/views/board/write.jsp")
+			.forward(request, response);
 			
+		} else if("insert".equals(action)) {	
+			String title = request.getParameter("title");
+			String contents = request.getParameter("contents");
+			
+			BoardVo vo = new BoardVo();
+			vo.setTitle(title);
+			vo.setContents(contents);
+			
+			new BoardDao().insert(vo);
+			
+			response.sendRedirect(request.getContextPath() + "/board");
+						
 		} else if("deleteform".equals(action)) {
 //			//// Access Control
 //			HttpSession session = request.getSession();
@@ -26,7 +44,7 @@ public class BoardController extends HttpServlet {
 //			}
 //					////
 			request
-			.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp")
+			.getRequestDispatcher("/WEB-INF/views/board/deleteform.jsp")
 			.forward(request, response);
 			
 		} else if("delete".equals(action)) {
@@ -34,7 +52,7 @@ public class BoardController extends HttpServlet {
 			String password = request.getParameter("password");
 			new GuestbookDao().deleteByNoAndPassword(Long.parseLong(no), password);
 
-			response.sendRedirect(request.getContextPath() + "/guestbook");
+			response.sendRedirect(request.getContextPath() + "/board");
 
 		}else {
 			request

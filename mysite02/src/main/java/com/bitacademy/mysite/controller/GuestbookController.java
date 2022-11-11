@@ -43,7 +43,7 @@ public class GuestbookController extends HttpServlet {
 			
 //			String sno = request.getParameter("no");
 //			Long no = Long.parseLong(sno);
-//			new GuestbookDao().deleteByNoAndPassword(no, password);
+//			String password = request.getParameter("password");
 //			new GuestbookDao().deleteByNoAndPassword(no, password);
 
 			response.sendRedirect(request.getContextPath() + "/guestbook");

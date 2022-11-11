@@ -15,7 +15,8 @@ public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		// EncodingFilter에 의해 아래 기본 세팅
+		// request.setCharacterEncoding("utf-8");
 		
 		String action = request.getParameter("a");
 		

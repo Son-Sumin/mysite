@@ -33,7 +33,7 @@
 					</table>
 				</form>
 				<ul>
-					<li>	
+					<li>
 						<table>
 							<c:set var='count' value='${fn:length(list) }' />
 							<c:forEach items='${list }' var='guestbookVo' varStatus='status'>

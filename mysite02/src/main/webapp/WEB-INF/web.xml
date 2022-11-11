@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
-	<display-name>mysite02</display-name>
-	
-	<!-- Filters / 앞으로 모든 요청(/*)에 이 필터가 들어간다. -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>mysite02</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>com.bitacademy.web.ContextLoadListener</listener-class>
+	</listener>
+
+	<!-- Filter -->
 	<filter>
-		<display-name>EncodingFilter</display-name>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>com.bitacademy.web.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- Servlets -->
 	<servlet>
 		<servlet-name>MainController</servlet-name>
 		<servlet-class>com.bitacademy.mysite.controller.MainController</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/servlet-config.xml</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainController</servlet-name>
 		<url-pattern></url-pattern>
 	</servlet-mapping>
-	
 	<servlet>
 		<servlet-name>UserController</servlet-name>
 		<servlet-class>com.bitacademy.mysite.controller.UserController</servlet-class>
@@ -34,7 +46,6 @@
 		<servlet-name>UserController</servlet-name>
 		<url-pattern>/user</url-pattern>
 	</servlet-mapping>
-	
 	<servlet>
 		<servlet-name>GuestbookController</servlet-name>
 		<servlet-class>com.bitacademy.mysite.controller.GuestbookController</servlet-class>
@@ -44,7 +55,7 @@
 		<url-pattern>/guestbook</url-pattern>
 	</servlet-mapping>
 	
-	<!-- Welocome Files(Default Files) -->
+	<!-- Welcome Files(Default Files) -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -53,5 +64,4 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
 </web-app>

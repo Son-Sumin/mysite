@@ -22,7 +22,7 @@ public class BoardDao {
 			
 			if("".equals(vo.getGroupNo())) {
 			String sql = 
-					" insert into board values(null, ?, ?, '1', date_format(now(), '%Y/%m/%d %H:%i:%s'), '1', '1', '0', ?)";
+					" insert into board values(null, ?, ?, 1, date_format(now(), '%Y/%m/%d %H:%i:%s'), 1, 1, 1, ?)";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getTitle());
@@ -31,7 +31,8 @@ public class BoardDao {
 			
 			} else {
 				String sql = 
-						" insert into board values(null, ?, ?, '1', date_format(now(), '%Y/%m/%d %H:%i:%s'), max(?) as maxGroupNo +1, '1', '0', ?)";
+						" insert into board values(null, ?, ?, 1, date_format(now(), '%Y/%m/%d %H:%i:%s')," + 
+						" (select max(group_no))+1, 1, 1, ?)";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());

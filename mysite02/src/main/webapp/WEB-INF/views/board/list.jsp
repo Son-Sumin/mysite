@@ -29,24 +29,7 @@
 						<th>조회수</th>
 						<th>작성일</th>
 						<th>&nbsp;</th>
-					</tr>
-					
-					<c:set var='count' value='${fn:length(list) }' />
-					<c:forEach items='${list }' var='boardVo' varStatus='status'>
-					<tr>
-						<td>[${count-status.index }]</td>
-						<td>${boardVo.title }</td>
-						<td>${boardVo.name }</td>
-						<td>3</td>
-						<td>${boardVo.regDate }</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete&no='${vo.no }'">삭제</a></td>
-					</tr>
-					<tr>
-						<td colspan=4>
-							${fn:replace(boardVo.contents, newline, "<br/>") }
-						</td>
-					</tr>
-					</c:forEach>					
+					</tr>				
 					<tr>
 						<td>3</td>
 						<td style="text-align:left; padding-left:${0*20}px">
@@ -55,7 +38,7 @@
 						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-10-11 12:04:20</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=3" class="del">삭제</a></td>
 					</tr>
 					<tr>
 						<td>2</td>
@@ -66,7 +49,7 @@
 						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-10-02 12:04:12</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=2" class="del">삭제</a></td>
 					</tr>
 					<tr>
 						<td>1</td>
@@ -77,7 +60,7 @@
 						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-09-25 07:24:32</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=?" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete&&no=1" class="del">삭제</a></td>
 					</tr>
 					
 				</table>

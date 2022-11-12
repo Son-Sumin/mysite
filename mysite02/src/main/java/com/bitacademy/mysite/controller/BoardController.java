@@ -6,10 +6,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bitacademy.mysite.dao.BoardDao;
-import com.bitacademy.mysite.dao.GuestbookDao;
 import com.bitacademy.mysite.vo.BoardVo;
+import com.bitacademy.mysite.vo.UserVo;
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,14 +36,14 @@ public class BoardController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/board");
 						
 //		} else if("deleteform".equals(action)) {
-////			//// Access Control
-////			HttpSession session = request.getSession();
-////			UserVo authUser = (UserVo)session.getAttribute("authUser");
-////			if(authUser == null) {
-////				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
-////				return;
-////			}
-////					////
+//			//// Access Control
+//			HttpSession session = request.getSession();
+//			UserVo authUser = (UserVo)session.getAttribute("authUser");
+//			if(authUser == null) {
+//				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
+//				return;
+//			}
+//					////
 //			request
 //			.getRequestDispatcher("/WEB-INF/views/board/deleteform.jsp")
 //			.forward(request, response);
@@ -82,3 +83,6 @@ public class BoardController extends HttpServlet {
 	}
 
 }
+
+// 데이터 변경 없을 때 : request.getRequestDispatcher("/WEB-INF/경로~").forward(request, response);  -> 경로
+// 데이터 변경 있을 때 : response.sendRedirect(request.getContextPath() + "/board");  -> URL

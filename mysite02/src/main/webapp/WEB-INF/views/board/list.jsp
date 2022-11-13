@@ -57,7 +57,7 @@
 						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-10-11 12:04:20</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=3" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete" class="del">삭제</a></td>
 					</tr>
 					<tr>
 						<td>2</td>
@@ -68,7 +68,7 @@
 						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-10-02 12:04:12</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=2" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete" class="del">삭제</a></td>
 					</tr>
 					<tr>
 						<td>1</td>
@@ -79,7 +79,7 @@
 						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-09-25 07:24:32</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete&&no=1" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete" class="del">삭제</a></td>
 					</tr>
 					
 				</table>

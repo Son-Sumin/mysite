@@ -20,27 +20,14 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			
-			if("".equals(vo.getGroupNo())) {
-			String sql = 
-					" insert into board values(null, ?, ?, 1, date_format(now(), '%Y/%m/%d %H:%i:%s'), 1, 1, 1, ?)";
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getContents());
-			pstmt.setLong(3, vo.getUserNo());
-			
-			} else {
 				String sql = 
-						" insert into board values(null, ?, ?, 1, date_format(now(), '%Y/%m/%d %H:%i:%s')," + 
+						" insert into board values(null, ?, ?, 0, date_format(now(), '%Y/%m/%d %H:%i:%s')," + 
 						" (select max(group_no))+1, 1, 1, ?)";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());
 				pstmt.setString(2, vo.getContents());
-				pstmt.setLong(3, vo.getGroupNo());
-				pstmt.setLong(4, vo.getUserNo());
-
-			}
+				pstmt.setLong(3, vo.getUserNo());
 			
 			int count = pstmt.executeUpdate();
 			

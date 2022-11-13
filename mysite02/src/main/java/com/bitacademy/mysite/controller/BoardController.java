@@ -26,10 +26,12 @@ public class BoardController extends HttpServlet {
 		} else if("insert".equals(action)) {	
 			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
+			String userNo = request.getParameter("userNo");
 			
 			BoardVo vo = new BoardVo();
 			vo.setTitle(title);
 			vo.setContents(contents);
+			vo.setUserNo(Long.parseLong(userNo));
 			
 			new BoardDao().insert(vo);
 			

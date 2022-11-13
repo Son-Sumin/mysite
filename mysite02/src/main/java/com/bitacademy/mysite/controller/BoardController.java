@@ -83,7 +83,6 @@ public class BoardController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
 
 // 데이터 변경 없을 때 : request.getRequestDispatcher("/WEB-INF/경로~").forward(request, response);  -> 경로

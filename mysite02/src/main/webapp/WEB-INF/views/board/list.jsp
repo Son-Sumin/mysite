@@ -29,7 +29,26 @@
 						<th>조회수</th>
 						<th>작성일</th>
 						<th>&nbsp;</th>
-					</tr>				
+					</tr>	
+					
+					<!--  <c:set var='count' value='${fn:length(list) }' />
+					<c:forEach items='${list }' var='boardVo' varStatus='status'>
+					<tr>
+						<td>[${count-status.index }]</td>
+						<td>${boardVo.title }</td>
+						<td>${boardVo.name }</td>
+						<td>3</td>
+						<td>${boardVo.regDate }</td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete&no='${vo.no }'">삭제</a></td>
+					</tr>
+					<tr>
+						<td colspan=4>
+							${fn:replace(boardVo.contents, newline, "<br/>") }
+						</td>
+					</tr>
+					</c:forEach>	 -->
+					
+								
 					<tr>
 						<td>3</td>
 						<td style="text-align:left; padding-left:${0*20}px">

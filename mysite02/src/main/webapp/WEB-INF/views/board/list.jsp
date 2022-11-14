@@ -35,6 +35,9 @@
 					<c:forEach items='${list }' var='boardVo' varStatus='status'>
 					<tr>
 						<td>[${count-status.index }]</td>
+						<c:forEach begin='0' end='${vo.depth-1 }' step='1' var='c'>
+							<td>cell(${c }, ${r })</td>
+						</c:forEach>
 						<td>${boardVo.title }</td>
 						<td>${boardVo.name }</td>
 						<td>3</td>

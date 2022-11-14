@@ -21,8 +21,8 @@ public class BoardDao {
 			conn = getConnection();
 			
 				String sql = 
-						" insert into board values(null, ?, ?, 0, date_format(now(), '%Y/%m/%d %H:%i:%s')," + 
-						" (select max(group_no))+1, 1, 1, ?)";
+						" insert into board values(null, ?, ?, 1, date_format(now(), '%Y/%m/%d %H:%i:%s')," + 
+						" (select max(group_no))+1, 1, 0, ?";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());

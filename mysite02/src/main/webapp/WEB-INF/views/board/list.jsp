@@ -31,31 +31,29 @@
 						<th>&nbsp;</th>
 					</tr>	
 					
-					<!--  <c:set var='count' value='${fn:length(list) }' />
+			<!-- 
+					<c:set var='count' value='${fn:length(list) }' />
 					<c:forEach items='${list }' var='boardVo' varStatus='status'>
-					<tr>
-						<td>[${count-status.index }]</td>
-						<c:forEach begin='0' end='${vo.depth-1 }' step='1' var='c'>
-							<td>cell(${c }, ${r })</td>
-						</c:forEach>
-						<td>${boardVo.title }</td>
-						<td>${boardVo.name }</td>
-						<td>3</td>
-						<td>${boardVo.regDate }</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete&no='${vo.no }'">삭제</a></td>
-					</tr>
-					<tr>
-						<td colspan=4>
-							${fn:replace(boardVo.contents, newline, "<br/>") }
-						</td>
-					</tr>
-					</c:forEach>	 -->
-					
-								
+						<tr>
+							<td>[${count-status.index }]</td>
+							<td style="text-align:left; padding-left:${boardVo.depth }*20px">
+								<a href="${pageContext.request.contextPath }/board?a=view">${boardVo.title }</a>
+							<td>${boardVo.name }</td>
+							<td>3</td>
+							<td>${boardVo.regDate }</td>
+							<td><a href="${pageContext.request.contextPath }/board?a=delete&no="${boardVo.no }" class="del"">삭제</a></td>
+						</tr>
+						<tr>
+							<td colspan=4>
+								${fn:replace(boardVo.contents, newline, "<br/>") }
+							</td>
+						</tr>
+					</c:forEach>	
+			-->					
 					<tr>
 						<td>3</td>
 						<td style="text-align:left; padding-left:${0*20}px">
-							<a href="">세 번째 글입니다.</a>
+							<a href="${pageContext.request.contextPath }/board?a=view">세 번째 글입니다.</a>
 						</td>
 						<td>안대혁</td>
 						<td>3</td>
@@ -66,7 +64,7 @@
 						<td>2</td>
 						<td style="text-align:left; padding-left:${1*20}px">
 							<img src='${pageContext.request.contextPath }/assets/images/reply.png' />
-							<a href="">두 번째 글입니다.</a>
+							<a href="${pageContext.request.contextPath }/board?a=view">두 번째 글입니다.</a>
 						</td>
 						<td>안대혁</td>
 						<td>3</td>
@@ -77,7 +75,7 @@
 						<td>1</td>
 						<td style="text-align:left; padding-left:${2*20}px">
 							<img src='${pageContext.request.contextPath }/assets/images/reply.png' />
-							<a href="">첫 번째 글입니다.</a>
+							<a href="${pageContext.request.contextPath }/board?a=view">첫 번째 글입니다.</a>
 						</td>
 						<td>안대혁</td>
 						<td>3</td>
@@ -109,7 +107,6 @@
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
-	</div>
 	</div>
 </body>
 </html>

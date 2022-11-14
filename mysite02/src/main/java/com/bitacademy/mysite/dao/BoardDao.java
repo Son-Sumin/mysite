@@ -22,7 +22,7 @@ public class BoardDao {
 			
 				String sql = 
 						" insert into board values(null, ?, ?, 1, date_format(now(), '%Y/%m/%d %H:%i:%s')," + 
-						" (select max(group_no))+1, 1, 0, ?";
+						" (select max(group_no))+1, 1, 0, ?)";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());
@@ -62,8 +62,11 @@ public class BoardDao {
 			conn = getConnection();
 
 			String sql = 
-					" select no, title, contents, hit, date_format(reg_date, '%Y/%m/%d %H:%i:%s')," +
-					" group_no, order_no, depth, user_no, name, password" + 
+					" select a.no, a.title, a.contens, a.hit," +
+					" date_format(a.reg_date, '%Y/%m/%d %H:%i:%s'), a.group_no," +
+					" a.order_no, a.depth, a.user_no, b.name, b.password" +
+					" from board a, user b" +
+					" where a.user_no = b.no" + 
 					" order by group_no desc, order_no asc";
 			pstmt = conn.prepareStatement(sql);
 			

@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%
+	pageContext.setAttribute("newline", "\n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,15 +23,13 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>제목입니다.</td>
+						<td>${boardVo.title }</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
-						<td>
+						<td colspan=4>
 							<div class="view-content">
-								내용 1입니다.<br>
-								내용 2입니다.<br>
-								내용 3입니다.
+								${fn:replace(boardVo.contents, newline, "<br/>") }
 							</div>
 						</td>
 					</tr>
@@ -44,7 +45,6 @@
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
-	</div>
 	</div>
 </body>
 </html>

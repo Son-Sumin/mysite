@@ -23,14 +23,18 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>${boardVo.title }</td>
+						<c:forEach items='${list }' var='boardVo' varStatus='status'>
+							<td>${boardVo.title }</td>
+						</c:forEach>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td colspan=4>
 							<div class="view-content">
+							<c:forEach items='${list }' var='boardVo' varStatus='status'>
 								${boardVo.contents }
 								${fn:replace(boardVo.contents, newline, "<br/>") }
+							</c:forEach>
 							</div>
 						</td>
 					</tr>

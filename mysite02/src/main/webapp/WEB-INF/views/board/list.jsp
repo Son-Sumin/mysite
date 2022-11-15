@@ -35,11 +35,11 @@
 								<c:if test="${boardVo.depth != 0 }">
 									<img src='${pageContext.request.contextPath }/assets/images/reply.png' />
 								</c:if>
-								<a href="${pageContext.request.contextPath }/board?a=view">${boardVo.title }</a>
+								<a href="${pageContext.request.contextPath }/board?a=view&no=${boardVo.no }">${boardVo.title }</a>
 							<td>${boardVo.name }</td>
 							<td>${boardVo.hit }</td>
 							<td>${boardVo.regDate }</td>
-							<td><a href="${pageContext.request.contextPath }/board?a=delete&no='${boardVo.no }' class='del'">
+							<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${boardVo.no }" class='del'>
 							    <img src='${pageContext.request.contextPath }/assets/images/recycle.png' /></a>
 							</td>
 						</tr>

@@ -17,28 +17,26 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<div id="content">
 			<div id="board" class="board-form">
-				<table class="tbl-ex">
-					<tr>
-						<th colspan="2">글보기</th>
-					</tr>
-					<tr>
-						<td class="label">제목</td>
-						<c:forEach items='${list }' var='boardVo' varStatus='status'>
-							<td>${boardVo.title }</td>
-						</c:forEach>
-					</tr>
-					<tr>
-						<td class="label">내용</td>
-						<td colspan=4>
-							<div class="view-content">
-							<c:forEach items='${list }' var='boardVo' varStatus='status'>
-								${boardVo.contents }
-								${fn:replace(boardVo.contents, newline, "<br/>") }
-							</c:forEach>
-							</div>
-						</td>
-					</tr>
-				</table>
+			<form method="post" action="${pageContext.request.contextPath }/view">
+				<input type='hidden' name='no' value='${param.no }'>
+					<table class="tbl-ex">
+						<tr>
+							<th colspan="2">글보기</th>
+						</tr>
+						<tr>
+							<td class="label">제목</td>
+							<td>${param.title }</td>
+						</tr>
+						<tr>
+							<td class="label">내용</td>
+							<td colspan=4>
+								<div class="view-content">
+									${fn:replace(param.contents, newline, '<br/>') }
+								</div>
+							</td>
+						</tr>					
+					</table>
+				</form>
 				<!-- authUser no와 userVo no 같게 하기 -->
 				<!-- /board?a=view$no=10 -->
 				<div class="bottom">

@@ -36,19 +36,6 @@ public class BoardController extends HttpServlet {
 			new BoardDao().insert(vo);
 			
 			response.sendRedirect(request.getContextPath() + "/board");
-						
-//		} else if("deleteform".equals(action)) {
-//			//// Access Control
-//			HttpSession session = request.getSession();
-//			UserVo authUser = (UserVo)session.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
-//				return;
-//			}
-//					////
-//			request
-//			.getRequestDispatcher("/WEB-INF/views/board/deleteform.jsp")
-//			.forward(request, response);
 			
 		} else if("delete".equals(action)) {
 			String sno = request.getParameter("no");

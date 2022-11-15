@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%
-	pageContext.setAttribute("newline", "\n");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,24 +26,22 @@
 						<th>조회수</th>
 						<th>작성일</th>
 						<th>&nbsp;</th>
-					</tr>	
+					</tr>
 					<c:set var='count' value='${fn:length(list) }' />
 					<c:forEach items='${list }' var='boardVo' varStatus='status'>
 						<tr>
 							<td>[${count-status.index }]</td>
-							<td style="text-align:left; padding-left:${boardVo.depth }*20px">
+							<td style="text-align:left; padding-left:${boardVo.depth*20}px">
+								<c:if test="${boardVo.depth != 0 }">
+									<img src='${pageContext.request.contextPath }/assets/images/reply.png' />
+								</c:if>
 								<a href="${pageContext.request.contextPath }/board?a=view">${boardVo.title }</a>
 							<td>${boardVo.name }</td>
-							<td>3</td>
+							<td>${boardVo.hit }</td>
 							<td>${boardVo.regDate }</td>
 							<td><a href="${pageContext.request.contextPath }/board?a=delete&no='${boardVo.no }' class='del'">삭제</a></td>
 						</tr>
-						<tr>
-							<td colspan=4>
-								${fn:replace(boardVo.contents, newline, "<br/>") }
-							</td>
-						</tr>
-					</c:forEach>	
+					</c:forEach>
 				</table>
 				
 				<!-- pager 추가 -->

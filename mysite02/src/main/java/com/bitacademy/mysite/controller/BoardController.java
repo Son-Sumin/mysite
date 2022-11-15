@@ -1,6 +1,7 @@
 package com.bitacademy.mysite.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bitacademy.mysite.dao.BoardDao;
+import com.bitacademy.mysite.dao.GuestbookDao;
 import com.bitacademy.mysite.vo.BoardVo;
+import com.bitacademy.mysite.vo.GuestbookVo;
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -73,6 +76,9 @@ public class BoardController extends HttpServlet {
 			.forward(request, response);
 			
 		} else {
+			List<GuestbookVo> list = new GuestbookDao().findAll();
+			
+			request.setAttribute("list", list);
 			request
 				.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
 				.forward(request, response);

@@ -62,7 +62,7 @@
 				
 				<!-- authUser not empty 로그인시만 보이기 -->
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board?a=write&no=${authUser.no }" id="new-book">글쓰기</a>
 				</div>				
 			</div>
 		</div>

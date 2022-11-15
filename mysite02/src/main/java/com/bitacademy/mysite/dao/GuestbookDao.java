@@ -11,7 +11,7 @@ import java.util.List;
 import com.bitacademy.mysite.vo.GuestbookVo;
 
 public class GuestbookDao {
-
+	
 	public Boolean insert(GuestbookVo vo) {
 		boolean result = false;
 		
@@ -47,7 +47,7 @@ public class GuestbookDao {
 		}
 		return result;
 	}
-
+	
 	
 	public List<GuestbookVo> findAll() {
 		List<GuestbookVo> result = new ArrayList<>();
@@ -98,6 +98,7 @@ public class GuestbookDao {
 		}
 		return result;
 	}
+	
 	
 	public Boolean deleteByNoAndPassword(Long no, String password) {
 		boolean result = false;

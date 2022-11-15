@@ -153,6 +153,47 @@ public class BoardDao {
 		return result;
 	}
 	
+	public BoardVo findByNo(Long no) {
+		BoardVo result = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = " select title, contents from board where no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String title = rs.getString(1);
+				String contents = rs.getString(2);
+				
+				result = new BoardVo();
+				result.setTitle(title);
+				result.setContents(contents);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;

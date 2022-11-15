@@ -46,6 +46,13 @@ public class BoardController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/board");
 
 		} else if ("view".equals(action)) {
+			String no = request.getParameter("no");
+			
+			new BoardVo().setNo(Long.parseLong(no));
+			
+			BoardVo vo = new BoardDao().findByNo(Long.parseLong(no));
+			request.setAttribute("boardVo", vo);
+			
 			request
 			.getRequestDispatcher("/WEB-INF/views/board/view.jsp")
 			.forward(request, response);

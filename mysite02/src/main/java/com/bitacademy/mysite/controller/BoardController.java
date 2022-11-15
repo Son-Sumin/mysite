@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bitacademy.mysite.dao.BoardDao;
-import com.bitacademy.mysite.dao.GuestbookDao;
 import com.bitacademy.mysite.vo.BoardVo;
-import com.bitacademy.mysite.vo.GuestbookVo;
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -76,7 +74,7 @@ public class BoardController extends HttpServlet {
 			.forward(request, response);
 			
 		} else {
-			List<GuestbookVo> list = new GuestbookDao().findAll();
+			List<BoardVo> list = new BoardDao().findAll();
 			
 			request.setAttribute("list", list);
 			request

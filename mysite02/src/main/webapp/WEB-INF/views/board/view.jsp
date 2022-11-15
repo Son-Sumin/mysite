@@ -29,6 +29,7 @@
 						<td class="label">내용</td>
 						<td colspan=4>
 							<div class="view-content">
+								${boardVo.contents }
 								${fn:replace(boardVo.contents, newline, "<br/>") }
 							</div>
 						</td>

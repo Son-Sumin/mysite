@@ -39,7 +39,9 @@
 							<td>${boardVo.name }</td>
 							<td>${boardVo.hit }</td>
 							<td>${boardVo.regDate }</td>
-							<td><a href="${pageContext.request.contextPath }/board?a=delete&no='${boardVo.no }' class='del'">삭제</a></td>
+							<td><a href="${pageContext.request.contextPath }/board?a=delete&no='${boardVo.no }' class='del'">
+							    <img src='${pageContext.request.contextPath }/assets/images/recycle.png' /></a>
+							</td>
 						</tr>
 					</c:forEach>
 				</table>

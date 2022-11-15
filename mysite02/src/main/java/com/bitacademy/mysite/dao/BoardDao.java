@@ -62,7 +62,7 @@ public class BoardDao {
 			conn = getConnection();
 
 			String sql = 
-					" select a.no, a.title, a.contens, a.hit," +
+					" select a.no, a.title, a.contents, a.hit," +
 					" date_format(a.reg_date, '%Y/%m/%d %H:%i:%s'), a.group_no," +
 					" a.order_no, a.depth, a.user_no, b.name, b.password" +
 					" from board a, user b" +

@@ -40,7 +40,9 @@
 								<td>[${count-status.index }]</td>
 								<td>${guestbookVo.name }</td>
 								<td>${guestbookVo.regDate }</td>
-								<td><a href="${pageContext.request.contextPath }/guestbook/delete&no=${guestbookVo.no }">삭제</a></td>
+								<c:if test="${not empty authUser}">
+									<td><a href="${pageContext.request.contextPath }/guestbook/delete/${guestbookVo.no }">삭제</a></td>
+								</c:if>
 							</tr>
 							<tr>
 								<td colspan=4>

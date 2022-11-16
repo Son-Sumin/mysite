@@ -63,7 +63,7 @@ public class BoardController extends HttpServlet {
 			if(authUser == null) {
 				response.sendRedirect(request.getContextPath() + "user?a=loginform");
 				return;
-			
+			}
 			BoardVo vo = new BoardDao().findByNo(authUser.getNo());
 			request.setAttribute("boardVo", vo);
 			
@@ -72,11 +72,12 @@ public class BoardController extends HttpServlet {
 			.forward(request, response);
 			
 		} else if ("modify".equals(action)) {
-//			HttpSession session = request.getSession();
-//			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-//				return;
+			HttpSession session = request.getSession();
+			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+				return;
+			}
 			
 			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
@@ -90,7 +91,7 @@ public class BoardController extends HttpServlet {
 			
 			new BoardDao().update(vo);
 			
-			// authUser.setName(name);
+			authUser.setTitle(title);
 			
 			response.sendRedirect(request.getContextPath() + "/board");
 			
@@ -108,7 +109,7 @@ public class BoardController extends HttpServlet {
 				.forward(request, response);
 		}
 	}
-}	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

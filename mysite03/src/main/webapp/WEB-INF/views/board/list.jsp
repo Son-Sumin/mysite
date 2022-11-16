@@ -39,9 +39,12 @@
 							<td>${boardVo.name }</td>
 							<td>${boardVo.hit }</td>
 							<td>${boardVo.regDate }</td>
-							<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${boardVo.no }" class='del'>
-							    <img src='${pageContext.request.contextPath }/assets/images/recycle.png' /></a>
-							</td>
+							<c:if test="${authUser.no == boardVo.userNo }">
+								<td>
+									<a href="${pageContext.request.contextPath }/board?a=delete&no=${boardVo.no }" class='del'>
+							   		<img src='${pageContext.request.contextPath }/assets/images/recycle.png' /></a>
+							   	</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</table>
@@ -61,9 +64,11 @@
 				<!-- pager 추가 -->
 				
 				<!-- authUser not empty 로그인시만 보이기 -->
-				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write&no=${authUser.no }" id="new-book">글쓰기</a>
-				</div>				
+				<c:if test="${not empty authUser}">
+					<div class="bottom">
+						<a href="${pageContext.request.contextPath }/board?a=write&no=${authUser.no }" id="new-book">글쓰기</a>
+					</div>
+				</c:if>				
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>

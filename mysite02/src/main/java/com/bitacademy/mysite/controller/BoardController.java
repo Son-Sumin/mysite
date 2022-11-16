@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bitacademy.mysite.dao.BoardDao;
+import com.bitacademy.mysite.dao.UserDao;
 import com.bitacademy.mysite.vo.BoardVo;
+import com.bitacademy.mysite.vo.UserVo;
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -48,8 +50,6 @@ public class BoardController extends HttpServlet {
 		} else if ("view".equals(action)) {
 			String no = request.getParameter("no");
 			
-			new BoardVo().setNo(Long.parseLong(no));
-			
 			BoardVo vo = new BoardDao().findByNo(Long.parseLong(no));
 			request.setAttribute("boardVo", vo);
 			
@@ -58,13 +58,8 @@ public class BoardController extends HttpServlet {
 			.forward(request, response);
 			
 		} else if ("modifyform".equals(action)) {
-			HttpSession session = request.getSession();
-			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
-			if(authUser == null) {
-				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-				return;
-			}
-			BoardVo vo = new BoardDao().findByNo(authUser.getNo());
+			String no = request.getParameter("no");
+			BoardVo vo = new BoardDao().findByNo(Long.parseLong(no));
 			request.setAttribute("boardVo", vo);
 			
 			request
@@ -72,27 +67,17 @@ public class BoardController extends HttpServlet {
 			.forward(request, response);
 			
 		} else if ("modify".equals(action)) {
-			HttpSession session = request.getSession();
-			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
-			if(authUser == null) {
-				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-				return;
-			}
-			
 			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
 			String userNo = request.getParameter("userNo");
 			
 			BoardVo vo = new BoardVo();
-			vo.setNo(authUser.getNo());
 			vo.setTitle(title);
 			vo.setContents(contents);
 			vo.setUserNo(Long.parseLong(userNo));
 			
 			new BoardDao().update(vo);
-			
-			authUser.setTitle(title);
-			
+		
 			response.sendRedirect(request.getContextPath() + "/board");
 			
 		}  else if ("reply".equals(action)) {

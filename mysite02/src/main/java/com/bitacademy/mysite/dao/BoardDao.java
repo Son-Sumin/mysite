@@ -178,7 +178,7 @@ public class BoardDao {
 					" a.order_no, a.depth, a.user_no, b.name, b.password" +
 					" from board a, user b" +
 					" where a.user_no = b.no" + 
-					" order by group_no desc, order_no asc";
+					" order by reg_date desc, group_no desc, order_no asc";
 			pstmt = conn.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();

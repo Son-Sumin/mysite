@@ -39,7 +39,7 @@
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath }/board">글목록</a>
 					<c:if test="${not empty authUser}">
-						<a href="${pageContext.request.contextPath }/board?a=modifyform$no=${boardVo.userNo }">글수정</a>  <!-- authUser not empty 로그인시만 보이기+자기글만 -->
+						<a href="${pageContext.request.contextPath }/board?a=modifyform&no=${param.no }">글수정</a>  <!-- authUser not empty 로그인시만 보이기+자기글만 -->
 						<a href="${pageContext.request.contextPath }/board?a=relpy">답글</a>  <!-- authUser not empty 로그인시만 보이기 -->
 					</c:if>
 				</div>

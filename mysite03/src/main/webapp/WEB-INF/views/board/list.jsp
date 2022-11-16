@@ -42,8 +42,8 @@
 							<c:if test="${authUser.no == boardVo.userNo }">
 								<td>
 									<a href="${pageContext.request.contextPath }/board?a=delete&no=${boardVo.no }" class='del'>
-							   		<img src='${pageContext.request.contextPath }/assets/images/recycle.png' /></a>
-							   	</td>
+								    <img src='${pageContext.request.contextPath }/assets/images/recycle.png' /></a>
+								</td>
 							</c:if>
 						</tr>
 					</c:forEach>
@@ -65,9 +65,9 @@
 				
 				<!-- authUser not empty 로그인시만 보이기 -->
 				<c:if test="${not empty authUser}">
-					<div class="bottom">
-						<a href="${pageContext.request.contextPath }/board?a=write&no=${authUser.no }" id="new-book">글쓰기</a>
-					</div>
+				<div class="bottom">
+					<a href="${pageContext.request.contextPath }/board?a=write&no=${param.no }" id="new-book">글쓰기</a>
+				</div>
 				</c:if>				
 			</div>
 		</div>

@@ -15,8 +15,8 @@
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
-					<input type = "hidden" name = "a" value= "update">
-					<input type = "hidden" name = "userNo" value= "${authUser.no }">
+					<input type = "hidden" name = "a" value= "modify">
+					<input type = "hidden" name = "userNo" value= "${param.no }">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글수정</th>
@@ -37,7 +37,7 @@
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="${pageContext.request.contextPath }/board?a=view&no=${authUser.no }">취소</a>
+						<a href="${pageContext.request.contextPath }/board?a=view&no=${param.no }">취소</a>
 						<input type="submit" value="수정">
 					</div>
 				</form>				
@@ -45,6 +45,7 @@
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+	</div>
 	</div>
 </body>
 </html>

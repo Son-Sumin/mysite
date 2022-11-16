@@ -1,12 +1,16 @@
 package com.bitacademy.mysite.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bitacademy.mysite.service.GuestbookService;
 import com.bitacademy.mysite.vo.GuestbookVo;
+import com.bitacademy.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/guestbook")
@@ -33,8 +37,19 @@ public class GuestbookController {
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String delete(GuestbookVo vo) {
+	public String delete(GuestbookVo vo, HttpSession session) {
+		// Access Control
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		//////////////////
+		
+		vo.setNo(authUser.getNo());
 		guestbookService.deleteContents(vo.getNo(), vo.getPassword());
+		
+		authUser.setName(vo.getName());
+		
 		return "redirect:/guestbook/list";
 	}
 

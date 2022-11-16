@@ -57,10 +57,42 @@ public class BoardController extends HttpServlet {
 			.getRequestDispatcher("/WEB-INF/views/board/view.jsp")
 			.forward(request, response);
 			
-		} else if ("modify".equals(action)) {
+		} else if ("modifyform".equals(action)) {
+			HttpSession session = request.getSession();
+			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+				return;
+			
+			BoardVo vo = new BoardDao().findByNo(authUser.getNo());
+			request.setAttribute("boardVo", vo);
+			
 			request
 			.getRequestDispatcher("/WEB-INF/views/board/modify.jsp")
 			.forward(request, response);
+			
+		} else if ("modify".equals(action)) {
+//			HttpSession session = request.getSession();
+//			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
+//			if(authUser == null) {
+//				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+//				return;
+			
+			String title = request.getParameter("title");
+			String contents = request.getParameter("contents");
+			String userNo = request.getParameter("userNo");
+			
+			BoardVo vo = new BoardVo();
+			vo.setNo(authUser.getNo());
+			vo.setTitle(title);
+			vo.setContents(contents);
+			vo.setUserNo(Long.parseLong(userNo));
+			
+			new BoardDao().update(vo);
+			
+			// authUser.setName(name);
+			
+			response.sendRedirect(request.getContextPath() + "/board");
 			
 		}  else if ("reply".equals(action)) {
 			request
@@ -75,8 +107,9 @@ public class BoardController extends HttpServlet {
 				.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
 				.forward(request, response);
 		}
+		
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

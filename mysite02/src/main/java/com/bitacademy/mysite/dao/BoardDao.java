@@ -9,8 +9,87 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bitacademy.mysite.vo.BoardVo;
+import com.bitacademy.mysite.vo.UserVo;
 
 public class BoardDao {
+	
+	public boolean update(BoardVo vo) {
+		boolean result = false;
+		
+		Connection conn = null;  
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+
+			String sql = " update board set title=?, contents=? where no=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContents());
+			pstmt.setLong(3, vo.getNo());
+			
+			int count = pstmt.executeUpdate();
+		
+			result = count == 1;
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public BoardVo findByNo(Long no) {
+		BoardVo result = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = " select title, contents from board where no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String title = rs.getString(1);
+				String contents = rs.getString(2);
+				
+				result = new BoardVo();
+				result.setTitle(title);
+				result.setContents(contents);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	public Boolean insert(BoardVo vo) {
 		boolean result = false;
 		
@@ -50,6 +129,38 @@ public class BoardDao {
 		return result;
 	}
 
+	public Boolean deleteByNo(Long no) {
+		boolean result = false;
+		
+		Connection conn = null;  
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = " delete from board where no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			
+			int count = pstmt.executeUpdate();
+
+			result = count == 1;
+			
+		} catch (SQLException e) {
+			System.out.println("Error: " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 	
 	public List<BoardVo> findAll() {
 		List<BoardVo> result = new ArrayList<>();
@@ -119,82 +230,7 @@ public class BoardDao {
 		}
 		return result;
 	}
-	
-	public Boolean deleteByNo(Long no) {
-		boolean result = false;
 		
-		Connection conn = null;  
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql = " delete from board where no = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, no);
-			
-			int count = pstmt.executeUpdate();
-
-			result = count == 1;
-			
-		} catch (SQLException e) {
-			System.out.println("Error: " + e);
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
-	}
-	
-	public BoardVo findByNo(Long no) {
-		BoardVo result = null;
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql = " select title, contents from board where no = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, no);
-			
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				String title = rs.getString(1);
-				String contents = rs.getString(2);
-				
-				result = new BoardVo();
-				result.setTitle(title);
-				result.setContents(contents);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("Error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
-	}
-	
-	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 

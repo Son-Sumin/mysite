@@ -66,7 +66,7 @@ public class UserController {
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(Model model, HttpSession session) {
-		// Access Control  - controller 밖에서 제어하는 것이 바람직
+		// Access Control
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if(authUser == null) {
 			return "redirect:/";
@@ -80,7 +80,7 @@ public class UserController {
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(HttpSession session, UserVo userVo) {
-		// Access Control  - controller 밖에서 제어하는 것이 바람직
+		// Access Control
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if(authUser == null) {
 			return "redirect:/";
@@ -91,6 +91,7 @@ public class UserController {
 		userService.updateUser(userVo);
 		
 		authUser.setName(userVo.getName());
+		
 		return "redirect:/user/update";
 	}
 }

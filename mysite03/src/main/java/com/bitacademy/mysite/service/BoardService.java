@@ -1,0 +1,42 @@
+package com.bitacademy.mysite.service;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.bitacademy.mysite.vo.BoardVo;
+
+@Service
+public class BoardService {
+	
+	public void addContents(BoardVo vo) {  // 답글인지, 일반글인지 구별하기  // 답급 구
+		
+	}
+	
+	public BoardVo findContents(Long no) {  // 이때 hit 올리기
+		return null;
+	}
+	
+	public BoardVo findContents(Long no, Long userNo) {  // 수정하는 화면갈 때
+		return null;
+	} 
+	
+	public Map<String, Object> findContentsList(int currentPage) {
+		// view의 페이징을 처리하기 위한 데이터의 값 계산
+		int beginPage = 0;
+		int endPage = 0;
+		
+		// 리스트 가져오기
+		
+		return null;
+	}
+	
+	public void updateContents(BoardVo vo) {
+		
+	}
+	
+	public void deleteContents(Long no, Long userNo) {
+		
+	}
+	
+}

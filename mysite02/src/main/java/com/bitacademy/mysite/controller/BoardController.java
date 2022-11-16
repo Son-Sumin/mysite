@@ -58,14 +58,14 @@ public class BoardController extends HttpServlet {
 			.forward(request, response);
 			
 		} else if ("modifyform".equals(action)) {
-//			HttpSession session = request.getSession();
-//			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-//				return;
-//			
-//			BoardVo vo = new BoardDao().findByNo(authUser.getNo());
-//			request.setAttribute("boardVo", vo);
+			HttpSession session = request.getSession();
+			BoardVo authUser = (BoardVo)session.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "user?a=loginform");
+				return;
+			
+			BoardVo vo = new BoardDao().findByNo(authUser.getNo());
+			request.setAttribute("boardVo", vo);
 			
 			request
 			.getRequestDispatcher("/WEB-INF/views/board/modify.jsp")
@@ -107,7 +107,6 @@ public class BoardController extends HttpServlet {
 				.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
 				.forward(request, response);
 		}
-		
 	}
 }	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

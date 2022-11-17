@@ -16,7 +16,7 @@
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
 					<input type = "hidden" name = "a" value= "modify">
-					<input type = "hidden" name = "userNo" value= "${param.no }">
+					<input type = "hidden" name = "no" value= "${param.no }">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글수정</th>
@@ -45,7 +45,6 @@
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
-	</div>
 	</div>
 </body>
 </html>

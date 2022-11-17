@@ -8,12 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bitacademy.mysite.vo.BoardVo;
 
 @Repository
 public class BoardRepository {
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public boolean update(BoardVo vo) {
 		boolean result = false;
@@ -61,7 +65,7 @@ public class BoardRepository {
 		try {
 			conn = getConnection();
 			
-			String sql = " select title, contents from board where no = ?";
+			String sql = " select title, contents,hit, user_no from board where no = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, no);
 			
@@ -69,10 +73,14 @@ public class BoardRepository {
 			if(rs.next()) {
 				String title = rs.getString(1);
 				String contents = rs.getString(2);
+				Long hit = rs.getLong(3);
+				Long userNo = rs.getLong(4);
 				
 				result = new BoardVo();
 				result.setTitle(title);
 				result.setContents(contents);
+				result.setHit(hit);
+				result.setUserNo(userNo);
 			}
 			
 		} catch (SQLException e) {
@@ -195,7 +203,6 @@ public class BoardRepository {
 				Long depth = rs.getLong(8);
 				Long userNo = rs.getLong(9);
 				String name = rs.getString(10);
-				String password = rs.getString(11);
 
 				BoardVo vo = new BoardVo();
 				vo.setNo(no);
@@ -209,7 +216,6 @@ public class BoardRepository {
 //				vo.setDepth(depth);
 //				vo.setUserNo(userNo);
 //				vo.setName(name);
-//				vo.setPassword(password);
 
 				result.add(vo);
 			}

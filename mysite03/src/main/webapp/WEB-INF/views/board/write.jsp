@@ -34,8 +34,7 @@
 					<div class="bottom">
 						<a href="${pageContext.request.contextPath }/board">취소</a>
 						<input type="submit" value="등록">
-					</div>
-				</form>				
+					</div>				
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>

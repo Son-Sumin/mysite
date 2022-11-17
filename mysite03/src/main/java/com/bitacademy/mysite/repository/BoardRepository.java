@@ -101,42 +101,8 @@ public class BoardRepository {
 	}
 	
 	public Boolean insert(BoardVo vo) {
-		boolean result = false;
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = getConnection();
-			
-				String sql = 
-						" insert into board values(null, ?, ?, 1, date_format(now(), '%Y/%m/%d %H:%i:%s')," + 
-						" (select max(group_no))+1, 1, 0, ?)";
-				pstmt = conn.prepareStatement(sql);
-
-				pstmt.setString(1, vo.getTitle());
-				pstmt.setString(2, vo.getContents());
-				pstmt.setLong(3, vo.getUserNo());
-			
-			int count = pstmt.executeUpdate();
-			
-			result = count == 1;
-			
-		} catch (SQLException e) {
-			System.out.println("Error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
+		int count = sqlSession.insert("board.insert", vo);
+		return count == 1;
 	}
 
 	public Boolean deleteByNo(Long no) {

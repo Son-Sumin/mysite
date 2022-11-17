@@ -32,7 +32,7 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 	</bean>
 	
 	<!-- MyBatis SqlSessionTemplate -->
-	<!-- 위의 객체(MyBatis SqlSessionFactory)를 아래에 생성자로 DI시키는 중, 위id = ref -->
+	<!-- 위의 객체(Connection pool DataSource)를 아래에 생성자로 DI시키는 중, 위id = ref -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>

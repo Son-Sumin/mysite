@@ -66,7 +66,7 @@
 				<!-- authUser not empty 로그인시만 보이기 -->
 				<c:if test="${not empty authUser}">
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write&no=${param.no }" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board/write" id="new-book">글쓰기</a>
 				</div>
 				</c:if>				
 			</div>

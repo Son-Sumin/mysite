@@ -8,7 +8,7 @@ public class BoardVo {
 	private String regDate;
 	private Integer groupNo;
 	private Integer orderNo;
-	private Integer depth;
+	private Integer depth;	
 	private long userNo;
 	private String userName;
 	

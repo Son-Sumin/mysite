@@ -41,14 +41,37 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 </beans>
 
 <!-- 
-datasource-connection pool
+ ** datasource-connection pool
 - JDBC를 통해 DB를 사용하려면, Connection 타입의 DB 연결 객체가 필요하다.
 - 풀링(pooling) 기법 사용;
   정해진 개수의 DB Connection Pool에 준비하고 애플리케이션 요청때 마다 꺼내서 할당하고 돌려받아 pool에 저장.
 - 엔터프라이즈 시스템에서는 반드시 DB 연결 풀 기능을 지원하는 DataSource를 사용해야한다.
 
-아파치 Common DBCP 활용
+ ** 아파치 Common DBCP 활용
 mysite03/pom.xml; dependency 추가
 Repository; @Autowired 필드 생성 후 수정
+exception 패키지 생성
+
+-->
+
+<!-- 
+ ** MyBatis SqlSessionFactoryBean
+ ** mysite03.xml dependency 추가 -> applicationContext.xml bean 생성 -> configuration.xml -> user.xml
+src/main/java; 실행되는 패키지
+src/main/resources; 배포시 아래와 같이 배포됨 + 여기에 패키지 생성하는 이주
+tomcat
+ |- webapps
+     |- mysite03
+         |- WEB-INF
+	          |- web.xml
+	          |- libs(Maven Dependency)
+	          |- classes
+	               |- mybatis
+			            |- configuration.xml
+		           |- com
+		                |- bitacademy
+		                     |- mysite
+			                      |- controller
+			                          |-MainController.class
 
 -->

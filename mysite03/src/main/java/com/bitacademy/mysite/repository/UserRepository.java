@@ -114,7 +114,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 			
-			String sql = " elect no, name from user where email=? and password=?";
+			String sql = " select no, name from user where email=? and password=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);

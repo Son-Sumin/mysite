@@ -69,12 +69,12 @@ public class BoardController extends HttpServlet {
 		} else if ("modify".equals(action)) {
 			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
-			String userNo = request.getParameter("userNo");
+			String no = request.getParameter("no");
 			
 			BoardVo vo = new BoardVo();
 			vo.setTitle(title);
 			vo.setContents(contents);
-			vo.setUserNo(Long.parseLong(userNo));
+			vo.setNo(Long.parseLong(no));
 			
 			new BoardDao().update(vo);
 		

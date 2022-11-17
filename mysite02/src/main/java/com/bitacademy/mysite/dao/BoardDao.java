@@ -59,7 +59,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			
-			String sql = " select title, contents from board where no = ?";
+			String sql = " select title, contents,hit, user_no from board where no = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, no);
 			
@@ -67,10 +67,14 @@ public class BoardDao {
 			if(rs.next()) {
 				String title = rs.getString(1);
 				String contents = rs.getString(2);
+				Long hit = rs.getLong(3);
+				Long userNo = rs.getLong(4);
 				
 				result = new BoardVo();
 				result.setTitle(title);
 				result.setContents(contents);
+				result.setHit(hit);
+				result.setUserNo(userNo);
 			}
 			
 		} catch (SQLException e) {

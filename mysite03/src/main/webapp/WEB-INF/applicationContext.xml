@@ -24,7 +24,8 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 		<property name="password" value="webdb" />
 	</bean>
 	
-	<!-- MyBatis SqlSessionFactoryBean/ 위의 객체를 아래에 DI시키는 중, 위 id = ref id -->
+	<!-- MyBatis SqlSessionFactoryBean -->
+	<!-- 위의 객체(Connection pool DataSource)를 아래에 DI시키는 중, 위id = ref -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis/configuration.xml" />

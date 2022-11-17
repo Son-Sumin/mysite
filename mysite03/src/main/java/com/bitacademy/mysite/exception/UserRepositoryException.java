@@ -1,7 +1,7 @@
 package com.bitacademy.mysite.exception;
 
 public class UserRepositoryException extends RuntimeException {
-	private static
+	private static final long serialVersionUID = 1L;
 	
 	public UserRepositoryException() {
 		super("UserRepositoryException Occurs");

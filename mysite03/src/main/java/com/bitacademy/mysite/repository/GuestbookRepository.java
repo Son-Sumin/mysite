@@ -20,11 +20,9 @@ public class GuestbookRepository {
 		return count ==1;
 	}
 	
-	
 	public List<GuestbookVo> findAll() {
 		return sqlSession.selectList("guestbook.findAll");
 	}
-	
 	
 	public Boolean deleteByNoAndPassword(Long no, String password) {
 		Map<String, Object> map = new HashMap<>();

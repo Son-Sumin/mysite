@@ -6,8 +6,8 @@
 		 <![CDATA[
 		 select a.no, a.title, a.contents, a.hit, date_format(a.reg_date, '%Y/%m/%d %H:%i:%s'),
 		        a.group_no, a.order_no, a.depth, a.user_no, b.name
-		   from board a, user b"
-		  where a.user_no = b.no"
+		   from board a, user b
+		  where a.user_no = b.no
 	   order by reg_date desc, group_no desc, order_no asc
 		 ]]>
 	 </select>

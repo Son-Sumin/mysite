@@ -1,0 +1,95 @@
+##1117
+자바 예외
+Exception
+
+- Unchecked Exception → Logic Error
+- Checked Exception → Error → try~catch(사과, 로그, 종료) 예외 처리
+
+Checked Exception → 코딩시 인지 / 어쩔 수 없음 → RunTimeException으로 전환하기 → 실행시 인지
+상투적인 예외처리(try~catch)를 한 곳, 즉 Controller에서 하자
+RunTimeException으로 전환할 때 Controller에서 알 수 있게 의미있는 Exception 만들기(이름부여!)
+Controller에서 여러 개의 Exception 처리하면 사실상 예외처리에서 효율적인 결과를 내지 않음
+Repo에 있는 SQLException을 자체적으로 Controller로 올린 정도?
+Controller로 모인 여러 개의 Exception을 처리하는 것이 AOP이다
+tomcat은 AOP를 사용 중이다!
+예외를 아예 밖에서 처리!!
+AOP는 클래스(객체)를 하나 만들고, 적당한 시기에 횡단관심을 끌어모은다
+ - what  : advice
+ - when  : join point → before, after, after returning, after throwing, around(before+after)
+	→ where가 point cut으로 정의되면 when은 5가지로 축소됨.
+ 	    코드실행전, 코드실행후, 메소드 리턴 후, 예외발생할 경우, 코드실행 전후 모은 것
+ - where : point cut  →  which method(we just notice(set) AOP what kind of method)
+com.bitacademy.mysite.controller.*.*()
+
+~advice; AOP 설정이 들어감
+
+Datasource; connection pull
+
+ORM(Object Relation Mapping); 행위에 대한 설명임, 프로그램이나 언어에 국한되지 않음
+JPA Relation Mapping(Java Object Persistence Application, ORM 적용)
+자바에서는 JPA라 하고 Hibenate가 mapper 역할 중
+Object <->Relation  => 더 추상적
+
+*ORM
+1.Object <->Relation : JPA(Hibenate) ->ORM한다(잘못된 표현이지만 이렇게들 많이 씀)
+***2.Object <->SQL (parameter, result) : MyBatis의 Mapper(xml) -> JDBC한다
+
+result; resultset
+mapper(xml); parameter와 result mapping
+
+
+Session Template
+Result selectOne(SQL, Param) {    List <Result>selectList(SQL, Param) {
+1. 연결하기
+┌2. statement 준비
+ 3. 파라미터 바인딩     template
+ 4. 쿼리 실행
+└5. result 처리
+6.연결종료
+
+Runtime 때 예외 던지기
+try~catch
+}
+
+int insert(SQL, Param) {
+1.연결하기
+2. tx 시작
+┌3. statement 준비
+ 4. 파라미터 바인딩     template
+└5. 쿼리 실행/처리
+6. tx 종료
+7 .연결종료
+
+}
+
+1. 연결하기
+2. 트랜잭션 시작
+3. 쿼리 실행/처리 - template 해당
+4. 트랜잭션 종료
+5. 연결 종료
+
+Mapper(XML); SQL + Param + Result 정보 갖고 있음
+
+DataSource; getConnection 갖고 있음
+↓ DI
+Session Factory; MyBatis에 대한 전반적 정보 갖고 있음 → DI Mapper
+↓ DI					 → DI Repository
+Session Template; method 갖고있음
+
+배포시 아래와 같이 됨(war 형식)
+tomcat
+|-- webapps
+          |-- mysite03
+                    |-- WEB-INF
+	          |-- web.xml
+	          |-- libs(Maven Dependency)
+	          |-- classes
+	                    |-- mybatis
+			|-- configuration.xml    
+		    |-- com
+		          |-- bitacademy
+			|-- mysite
+			       |-- controller
+			             |--MainController.class
+
+mybatis #1

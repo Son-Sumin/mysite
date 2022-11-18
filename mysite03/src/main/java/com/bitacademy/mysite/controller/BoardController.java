@@ -36,9 +36,16 @@ public class BoardController {
 	@RequestMapping({"/delete/{no}"})
 	public String delete(
 			@PathVariable("no") Long no,
-			@PathVariable("userNo") Long userNo,
-			Model model) {
+			@PathVariable("userNo") Long userNo) {
 		boardService.deleteContents(no, userNo);
 		return "redirect:/board";
+	}
+	
+	@RequestMapping({"/view/{no}"})
+	public String view(
+			@PathVariable("no") Long no,
+			@PathVariable("userNo") Long userNo) {
+		boardService.findContents(no, userNo);
+		return "board/view";
 	}
 }

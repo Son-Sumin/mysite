@@ -23,7 +23,7 @@ public class BoardService {
 	}
 	
 	public BoardVo findContents(Long no, Long userNo) {  // 수정하는 화면갈 때
-		return null;
+		return boardRepository.findByNo(no);
 	} 
 	
 	public Map<String, Object> findContentsList(int currentPage) {

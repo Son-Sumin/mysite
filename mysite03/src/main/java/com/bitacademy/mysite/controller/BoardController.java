@@ -3,6 +3,7 @@ package com.bitacademy.mysite.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,7 +30,15 @@ public class BoardController {
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String write(BoardVo vo) {
 		boardService.addContents(vo);
-		return "redirect:/";
+		return "redirect:/board";
 	}
 
+	@RequestMapping({"/delete/{no}"})
+	public String delete(
+			@PathVariable("no") Long no,
+			@PathVariable("userNo") Long userNo,
+			Model model) {
+		boardService.deleteContents(no, userNo);
+		return "redirect:/board";
+	}
 }

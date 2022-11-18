@@ -1,5 +1,6 @@
 package com.bitacademy.mysite.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,15 @@ public class BoardService {
 	
 	public Map<String, Object> findContentsList(int currentPage) {
 		// view의 페이징을 처리하기 위한 데이터의 값 계산
-		int beginPage = 0;
-		int endPage = 0;
+//		int beginPage = 0;
+//		int endPage = 0;
+//		
+		Map<String, Object> map = new HashMap<>();
+//		map.put("page2", boardRepository.findAll());
 		
 		// 리스트 가져오기
 		
-		return null;
+		return map;
 	}
 	
 	public void updateContents(BoardVo vo) {
@@ -40,7 +44,7 @@ public class BoardService {
 	}
 	
 	public void deleteContents(Long no, Long userNo) {
-		
+		boardRepository.deleteByNo(no);
 	}
 	
 }

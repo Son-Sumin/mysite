@@ -20,4 +20,11 @@
 					(select max(group_no))+1, 1, 0, #{user_no })
 	 	]]>
 	 </insert>
+	 
+	 <update id="update" parameterType="boardvo">
+	 	<![CDATA[
+	 	update board
+	 	   set title=#{title }, contents=#{contents } where no=#{no }
+	 	]]>
+	 </update>
 </mapper>

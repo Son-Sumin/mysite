@@ -48,4 +48,21 @@ public class BoardController {
 		boardService.findContents(no, userNo);
 		return "board/view";
 	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	public String modify() {
+		return "board/modify";
+	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public String modify(BoardVo vo) {
+		boardService.updateContents(vo);
+		return "redirect:/board";
+	}
+	
+	@RequestMapping(value="/reply", method=RequestMethod.GET)
+	public String reply() {
+		return "board/reply";
+	}
+	
 }

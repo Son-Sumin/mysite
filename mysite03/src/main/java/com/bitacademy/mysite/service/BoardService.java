@@ -18,13 +18,21 @@ public class BoardService {
 		boardRepository.insert(vo);
 	}
 	
-	public BoardVo findContents(Long no) {  // 이때 hit 올리기
-		return null;
-	}
-	
 	public BoardVo findContents(Long no, Long userNo) {  // 수정하는 화면갈 때
 		return boardRepository.findByNo(no);
 	} 
+	
+	public void updateContents(BoardVo vo) {
+		boardRepository.update(vo);
+	}
+	
+	public void deleteContents(Long no, Long userNo) {
+		boardRepository.deleteByNo(no);
+	}
+	
+	public BoardVo findContents(Long no) {  // 이때 hit 올리기
+		return null;
+	}
 	
 	public Map<String, Object> findContentsList(int currentPage) {
 		// view의 페이징을 처리하기 위한 데이터의 값 계산
@@ -37,14 +45,6 @@ public class BoardService {
 		// 리스트 가져오기
 		
 		return map;
-	}
-	
-	public void updateContents(BoardVo vo) {
-		
-	}
-	
-	public void deleteContents(Long no, Long userNo) {
-		boardRepository.deleteByNo(no);
 	}
 	
 }

@@ -18,6 +18,10 @@ public class BoardService {
 		boardRepository.insert(vo);
 	}
 	
+	public BoardVo findContents(Long no) {  // 이때 hit 올리기
+		return null;
+	}
+	
 	public BoardVo findContents(Long no, Long userNo) {  // 수정하는 화면갈 때
 		return boardRepository.findByNo(no);
 	} 
@@ -28,10 +32,6 @@ public class BoardService {
 	
 	public void deleteContents(Long no, Long userNo) {
 		boardRepository.deleteByNo(no);
-	}
-	
-	public BoardVo findContents(Long no) {  // 이때 hit 올리기
-		return null;
 	}
 	
 	public Map<String, Object> findContentsList(int currentPage) {

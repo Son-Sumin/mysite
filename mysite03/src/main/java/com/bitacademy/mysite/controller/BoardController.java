@@ -42,10 +42,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping({"/view/{no}"})
-	public String view(
-			@PathVariable("no") Long no,
-			@PathVariable("userNo") Long userNo) {
-		boardService.findContents(no, userNo);
+	public String view(@PathVariable("no") Long no) {
+		boardService.findContents(no);
 		return "board/view";
 	}
 	

@@ -24,14 +24,6 @@ public class GuestbookController extends HttpServlet {
 		String action = request.getParameter("a");
 		
 		if("deleteform".equals(action)) {
-//			//// Access Control
-//			HttpSession session = request.getSession();
-//			UserVo authUser = (UserVo)session.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "/guestbook?a=deleteform");
-//				return;
-//			}
-//					////
 			request
 			.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp")
 			.forward(request, response);
@@ -41,22 +33,17 @@ public class GuestbookController extends HttpServlet {
 			String password = request.getParameter("password");
 			new GuestbookDao().deleteByNoAndPassword(Long.parseLong(no), password);
 			
-//			String sno = request.getParameter("no");
-//			Long no = Long.parseLong(sno);
+//			방법 2: String sno = request.getParameter("no");
+//			        Long no = Long.parseLong(sno);
+//			방법 3: Long no = Long.parseLong(request.getParameter("no"));
+//			
 //			String password = request.getParameter("password");
 //			new GuestbookDao().deleteByNoAndPassword(no, password);
 
 			response.sendRedirect(request.getContextPath() + "/guestbook");
 
 		}  else if("insert".equals(action)) {
-//			//// Access Control
-//			HttpSession session = request.getSession();
-//			UserVo authUser = (UserVo)session.getAttribute("authUser");
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath() + "user?a=loginform");
-//				return;
-//			}
-//			////		
+
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String contents = request.getParameter("contents");
@@ -67,19 +54,15 @@ public class GuestbookController extends HttpServlet {
 			vo.setContents(contents);
 			
 			new GuestbookDao().insert(vo);
-			
-//			authUser.setName(name);
-//			request.setAttribute("guestbookVo", vo);
-			
+		
 			response.sendRedirect(request.getContextPath() + "/guestbook");
 						
 		} else {
 			List<GuestbookVo> list = new GuestbookDao().findAll();
-			
 			request.setAttribute("list", list);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp");
-			rd.forward(request, response);
+			request
+				.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp")
+				.forward(request, response);
 		}
 	}
 	

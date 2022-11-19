@@ -4,11 +4,11 @@
 <mapper namespace="board">
 	<select id="findAll" resultType="boardvo">
 		 <![CDATA[
-		 select a.no, a.title, a.contents, a.hit, date_format(a.reg_date, '%Y/%m/%d %H:%i:%s'),
-		        a.group_no, a.order_no, a.depth, a.user_no, b.name
-		   from board a, user b
-		  where a.user_no = b.no
-	   order by reg_date desc, group_no desc, order_no asc
+		   select a.no, a.title, a.contents, a.hit, date_format(a.reg_date, '%Y/%m/%d %H:%i:%s'),
+		          a.group_no, a.order_no, a.depth, a.user_no, b.name
+		     from board a, user b
+		    where a.user_no = b.no
+	     order by reg_date desc, group_no desc, order_no asc
 		 ]]>
 	 </select>
 	 
@@ -17,9 +17,21 @@
 	 	insert 
 	 	  into board 
 	 	values(null, #{title }, #{contents }, 1, date_format(now(), '%Y/%m/%d %H:%i:%s'),
-					(select max(group_no))+1, 1, 0, #{user_no })
+					(select max(group_no))+1, 1, 0, #{userNo })
 	 	]]>
 	 </insert>
+	 
+	 <delete id="deleteByNo" parameterType="long">
+	 	<![CDATA[
+	 	delete from board where no = #{no }
+	 	]]>
+	 </delete>
+	 
+	 <select id="findByNo" resultType="boardvo" parameterType="long">
+		 <![CDATA[
+		 select title, contents, hit, user_no from board where no = #{no }
+		 ]]>
+	 </select>
 	 
 	 <update id="update" parameterType="boardvo">
 	 	<![CDATA[

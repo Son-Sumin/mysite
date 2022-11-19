@@ -2,9 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%
-	pageContext.setAttribute("newline", "\n");
-%>
+<% pageContext.setAttribute("newline", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,9 +38,9 @@
 					<a href="${pageContext.request.contextPath }/board">글목록</a>
 					<c:if test="${not empty authUser}">
 						<c:if test="${authUser.no == boardVo.userNo }">
-								<a href="${pageContext.request.contextPath }/board?a=modifyform&no=${param.no }">글수정</a>   <!-- authUser not empty 로그인시만 보이기+자기글만 -->
+								<a href="${pageContext.request.contextPath }/boarda=modify/${param.no }">글수정</a>
 						</c:if>
-						<a href="${pageContext.request.contextPath }/board?a=relpy">답글</a>  <!-- authUser not empty 로그인시만 보이기 -->
+						<a href="${pageContext.request.contextPath }/board/relpy">답글</a>
 					</c:if>
 				</div>
 			</div>

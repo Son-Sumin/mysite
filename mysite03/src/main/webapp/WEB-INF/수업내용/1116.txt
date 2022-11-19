@@ -1,3 +1,6 @@
+#1116
+(ApplicationArchitecture.png 참고)
+
 Tomcat에서 DefaultServlet이 정적자원의 URL을 처리해준다.
 
 mysite02까지 DispatcherServlet(URL /)이 UI처리
@@ -15,7 +18,7 @@ Spring 기본구조; MVC + 3layers
 Backend Controller들 ↔ Frontend Controller에서 JSP를 통해 UI 표현
 Backend Controller가 Service method 불러서 사용
 
-↑ DI
+   ↑ DI
 
 * @Service[Root Application Context, Interface(Impl) 활용 실무 비지니스]
   - 비즈니스에 맞게 이름 부여할 것; writeMessage, deleteByNo
@@ -23,7 +26,7 @@ method들 존재
 Service는 여러 개의 DAO들 가질 수 있음
 Service 내 method간 참조하는 설계는 잘못된 설계
 
-↑ DI
+   ↑ DI
 
 * @Repository[CRUD역할]
  - CRUD에 맞게 이름 부여할 것; insert, list, update, delete

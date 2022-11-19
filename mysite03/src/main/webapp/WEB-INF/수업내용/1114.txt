@@ -1,17 +1,17 @@
-##1114
-스프링 시작
+##1114(스프링 시작)
+##1115
 
-책 추천; 토비의 스프링 버전 상관없음, 스프링 인 앤션 (E.4)
+- 책 추천; 토비의 스프링 버전 상관없음, 스프링 인 앤션 (E.4)
 
 스프링 자체는 MVC, DAO가 없다
-스프링 프레임워크를 기반으로 스프링 MVC, 스프링 DAO를 추가한 것
+스프링 프레임워크를 기반으로 스프링 MVC, 스프링 DAO(Repository)를 추가한 것
 
-servlet은 tomcat이 관리 ->servlet container
+servlet은 tomcat이 관리 -> servlet container
 여러 개의 DAO는 EJB(Enterprise Java Bean)가 관리  ->EJB container
 
-WAS의 기능
+* WAS의 기능
 - servlet container
-- EJB container  -> 문제발생  ->Spring container가 해결
+- EJB container -> 문제발생 ->Spring container가 해결
 
 JAVA로 애플리케이션 프레임워크 (WEB, Console, DataBase 등으로 한정짓지 않음)
 
@@ -25,16 +25,17 @@ Spring MVC를 도와주는 bean들이 존재함 + 내가 만든 bean -> Spring c
 
 앞으로 Servlet container, Spring container(Spring MVC를 도와주는 bean, 내가 만든 bean) 2개 존재
 
+향후 스프링으로 작업 시
 1. 라이브러리 추가
 2. 설정
 3. MVC 작성
-
 
 POJO = AOP + PSA + IoC/DI
 현재 POJO 기반으로 프로그래밍
 
 ---------------------------------------------
 02. spirng
+(/spring-pracctices/helloweb03 참고)
 
 - init-service-doGet
 
@@ -72,6 +73,13 @@ C.M()  =  ModelAndView
 vr.resolve((String) ViewName)
 
 ***
+세팅 필요
+- helloweb03/pom.xm
+   ->  필요한 라이브러리, Spring Context(Container), Spring MVC,  Spring Web 추가
+- web.xml  -> Encoding Filter, Dispatcher Servlet 추가
+   -> Dispatcher Servlet 이름(ABC) = WEB-INF/ABC-servlet.xml
+- WEB-INF/spring-servlet.xml 생성 -> base-package 세부적으로 작성
+
 tomcat이 실행되면 web.xml이 loading됨.
 1.init()
 web.xml에 아래 2가지 설정해야함.
@@ -90,18 +98,3 @@ Root Application Context에 DAO가 Web Application Context DAO로 DI 발생
 2. service()
 
 3. doGet(request, response)
-
-com.bitacademy.emaillist.controller
-|- EmaillistController
-com.bitacademy.emaillist.repository
-|- EmaillistRepository
-com.bitacademy.emaillist.vo
-|- EmaillistVo
-
-
-com.bitacademy.guestbook.controller
-|- GuestbookController
-com.bitacademy.guestbook.repository
-|- GuestbookRepository
-com.bitacademy.guestbook.vo
-|- GuestbookVo

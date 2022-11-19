@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bitacademy.mysite.service.BoardService;
 import com.bitacademy.mysite.vo.BoardVo;
+import com.bitacademy.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/board")
@@ -43,7 +44,7 @@ public class BoardController {
 	
 	@RequestMapping({"/view/{no}"})
 	public String view(@PathVariable("no") Long no) {
-		boardService.findContents(no);
+		boardService.findContents(no);		
 		return "board/view";
 	}
 	
@@ -52,7 +53,7 @@ public class BoardController {
 		return "board/modify";
 	}
 	
-	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	@RequestMapping(value="/modify/{no}", method=RequestMethod.POST)
 	public String modify(BoardVo vo) {
 		boardService.updateContents(vo);
 		return "redirect:/board";

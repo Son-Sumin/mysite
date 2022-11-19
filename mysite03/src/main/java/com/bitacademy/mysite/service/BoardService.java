@@ -19,7 +19,7 @@ public class BoardService {
 	}
 	
 	public BoardVo findContents(Long no) {  // 이때 hit 올리기
-		return null;
+		return boardRepository.findByNo(no);
 	}
 	
 	public BoardVo findContents(Long no, Long userNo) {  // 수정하는 화면갈 때

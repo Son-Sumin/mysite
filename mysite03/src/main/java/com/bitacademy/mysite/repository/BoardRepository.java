@@ -35,48 +35,7 @@ public class BoardRepository {
 	}
 	
 	public BoardVo findByNo(Long no) {
-		BoardVo result = null;
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql = " select title, contents,hit, user_no from board where no = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, no);
-			
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				String title = rs.getString(1);
-				String contents = rs.getString(2);
-				Long hit = rs.getLong(3);
-				Long userNo = rs.getLong(4);
-				
-				result = new BoardVo();
-				result.setTitle(title);
-				result.setContents(contents);
-				result.setHit(hit);
-				result.setUserNo(userNo);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("Error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
+		return sqlSession.selectOne("board.findByNo", no);
 	}
 
 	public Boolean deleteByNo(Long no) {

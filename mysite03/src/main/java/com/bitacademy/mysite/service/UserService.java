@@ -20,7 +20,10 @@ public class UserService {
 	}
 
 	public UserVo findUser(UserVo userVo) {
-		return userRepository.findByEmailAndPassword(userVo.getEmail(), userVo.getPassword());
+		return findUser(userVo.getEmail(), userVo.getPassword());
+		
+		// 위 findUser override 전 버전
+		//return userRepository.findByEmailAndPassword(userVo.getEmail(), userVo.getPassword());
 	}
 	
 	public UserVo findUser(Long no) {

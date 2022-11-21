@@ -20,8 +20,14 @@ public class ControllerExceptionHandler {
 		// 로깅
 		StringWriter errors = new StringWriter();  // Stringbuffer 갖고 있는 StringWriter, 보조스트림
 		e.printStackTrace(new PrintWriter(errors));  // 주스트림  // 어떤 흐름, 어떤 메소드에서 발생했는지 알게끔
-		//System.out.println(errors.toString());   //////// 출력이 아니라 파일로 로그를 남겨보자!!!!!!!!
-		// mysite pom, 03 pom 추가!
+		
+		//System.out.println(errors.toString());   
+		/*
+		 * 출력이 아니라 파일로 로그를 남겨보자!!!!!!!!
+		 * 오류 발생 시 사용자에게 남기는 경우는 없음.
+		 * 오류 조치를 위해 관리자가 볼 수 있도록 로그를 파일로 기록
+		 * mysite pom, 03 pom 추가!(설정)
+		 */
 		
 		Logger.error(errors.toString());
 		

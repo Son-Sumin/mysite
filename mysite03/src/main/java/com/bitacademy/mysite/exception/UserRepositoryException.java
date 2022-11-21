@@ -1,5 +1,6 @@
 package com.bitacademy.mysite.exception;
 
+//교육을 위한 페이지. 참고용
 public class UserRepositoryException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	

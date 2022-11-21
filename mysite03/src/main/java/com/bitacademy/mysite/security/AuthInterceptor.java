@@ -42,7 +42,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(session == null) {
+		if(authUser == null) {
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}

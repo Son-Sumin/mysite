@@ -18,11 +18,12 @@ public class UserService {
 	public UserVo findUser(String email, String password) {
 		return userRepository.findByEmailAndPassword(email, password);	
 	}
-
+	
+	// UserVo findUser를 Controller에 맞게 수정하면서 override 하기
 	public UserVo findUser(UserVo userVo) {
 		return findUser(userVo.getEmail(), userVo.getPassword());
 		
-		// 위 findUser override 전 버전
+		// override 전 버전
 		//return userRepository.findByEmailAndPassword(userVo.getEmail(), userVo.getPassword());
 	}
 	

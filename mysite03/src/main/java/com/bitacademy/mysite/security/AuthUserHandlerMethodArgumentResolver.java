@@ -38,7 +38,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 			return false;
 		}
 		
-		// 파라키터 타입이 UserVo가 아니라면...
+		// 파라미터 타입이 UserVo가 아니라면...
 		if(parameter.getParameterType().equals(UserVo.class)) {
 			return false;
 		}

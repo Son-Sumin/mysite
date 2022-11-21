@@ -13,7 +13,8 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import com.bitacademy.mysite.vo.UserVo;
 
 public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-
+	
+	// supportsParameter이고 session 있으면
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
@@ -29,6 +30,9 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		return session.getAttribute("authUser");
 	}
 	
+	// authUser가 없으면 차단
+	// authUser가 있지만 Uservo를 변수로 안 가지면 차단
+	// supportsParameter = true ; authUser O, Uservo를 변수로 가짐
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
@@ -46,6 +50,14 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		return true;
 	}
 
-
-
 }
+
+/* 각 Controller에서 Access Control을 지우는 과정에서 authUser가 필요한 경우가 생겨 해당 페이지 작성
+ * Http 없애기 위해 해당 페이지 작성
+  interface AuthUser 생성 후 해당 페이지에 구현,  @AuthUser 통해 각 Controller에서 사용
+  
+UserVo authUser = (UserVo)session.getAttribute("authUser");  
+if(authUser == null) {										
+	return "redirect:/";
+}
+*/

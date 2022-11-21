@@ -29,5 +29,9 @@ public class GuestbookRepository {
 		map.put("no", no);
 		map.put("password", password);
 		return sqlSession.selectOne("guestbook.deleteByNoAndPassword", map);
+		
+		// 방법2
+		// int count = sqlSession.delete("guestbook.deleteByNoAndPassword", map);
+		// return count ==1;
 	}
 }

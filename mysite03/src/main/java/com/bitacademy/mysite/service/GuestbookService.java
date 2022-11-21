@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitacademy.mysite.repository.GuestbookRepository;
 import com.bitacademy.mysite.vo.GuestbookVo;
@@ -24,7 +22,9 @@ public class GuestbookService {
 	}
 	
 	public void addContents(GuestbookVo vo) {
+		System.out.println(vo);
 		guestbookRepository.insert(vo);
+		System.out.println(vo);
 	}
 
 }

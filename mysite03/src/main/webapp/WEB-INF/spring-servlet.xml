@@ -17,6 +17,25 @@
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler/>
 	
+	<!-- interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth" />  <!-- **; 모든경로 의미 -->
+			<bean class="com.bitacademy.mysite.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.bitacademy.mysite.security.LogoutInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/user/auth"/>
+			<mvc:exclude-mapping path="/user/logout"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.bitacademy.mysite.security.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<!-- ViewResolver 설정 /WEB-INF/views/(view 이름).jsp -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />	

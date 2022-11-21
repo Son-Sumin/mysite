@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bitacademy.mysite.security.Auth;
 import com.bitacademy.mysite.service.UserService;
 import com.bitacademy.mysite.vo.UserVo;
 
@@ -17,6 +18,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Auth
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String join() {
 		return "user/join";
@@ -33,7 +35,7 @@ public class UserController {
 		return "user/joinsuccess";
 	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value="/auth", method=RequestMethod.GET)
 	public String login() {
 		return "user/login";
 	}
@@ -50,42 +52,36 @@ public class UserController {
 	}
 	
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		// Access Control  - controller 밖에서 제어하는 것이 바람직
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////
-		
+	public String logout(HttpSession session) {	
 		session.removeAttribute("authUser");
 		session.invalidate();
-		
 		return "redirect:/";
 	}
 	
+	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(Model model, HttpSession session) {
-		// Access Control
+	public String update(Model model, @AuthUser UserVo authUser) {
+//		// Access Control
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////
+//		if(authUser == null) {
+//			return "redirect:/";
+//		}
+//		//////////////////
 		
 		UserVo userVo = userService.findUser(authUser.getNo());
 		model.addAttribute("UserVo", userVo);
 		return "user/update";
 	}
 	
+	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(HttpSession session, UserVo userVo) {
-		// Access Control
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////
+//		// Access Control
+		UserVo authUser = (UserVo)session.getAttribute("authUser");  // authUser의 정보를 써야해서 필요함
+//		if(authUser == null) {										 // authUser도 변수로 받기 위해 위를 활용
+//			return "redirect:/";
+//		}
+//		//////////////////
 		
 		userVo.setNo(authUser.getNo());
 		userService.updateUser(userVo);

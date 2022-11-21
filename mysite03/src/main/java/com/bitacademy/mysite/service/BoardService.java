@@ -1,7 +1,6 @@
 package com.bitacademy.mysite.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,17 +33,21 @@ public class BoardService {
 		boardRepository.deleteByNo(no);
 	}
 	
-	public Map<String, Object> findContentsList(int currentPage) {
-		// view의 페이징을 처리하기 위한 데이터의 값 계산
+	public List<BoardVo> getContentsList() {
+		return boardRepository.findAll();
+	}
+	
+//	public Map<String, Object> findContentsList(int currentPage) {
+//		// view의 페이징을 처리하기 위한 데이터의 값 계산
 //		int beginPage = 0;
 //		int endPage = 0;
 //		
-		Map<String, Object> map = new HashMap<>();
+//		Map<String, Object> map = new HashMap<>();
 //		map.put("page2", boardRepository.findAll());
-		
-		// 리스트 가져오기
-		
-		return map;
-	}
+//		
+//		// 리스트 가져오기
+//		
+//		return map;
+//	}
 	
 }

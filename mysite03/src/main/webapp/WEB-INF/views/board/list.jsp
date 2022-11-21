@@ -39,7 +39,7 @@
 							<td>${boardVo.name }</td>
 							<td>${boardVo.hit }</td>
 							<td>${boardVo.regDate }</td>
-							<c:if test="${authUser.no == boardVo.userNo }">
+							<c:if test="${authUser.name == boardVo.name }">
 								<td><a href="${pageContext.request.contextPath }/board/delete/${boardVo.no }" class="del">
 									<img src='${pageContext.request.contextPath }/assets/images/recycle.png' /></a>
 								</td>

@@ -10,7 +10,7 @@ public class BoardVo {
 	private Integer orderNo;
 	private Integer depth;	
 	private long userNo;
-	private String userName;
+	private String name;
 	
 	public long getNo() {
 		return no;
@@ -66,16 +66,17 @@ public class BoardVo {
 	public void setUserNo(long userNo) {
 		this.userNo = userNo;
 	}
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", regDate="
 				+ regDate + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
-				+ ", userName=" + userName + "]";
+				+ ", name=" + name + "]";
 	}
+
 }

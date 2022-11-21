@@ -34,6 +34,7 @@ public class UserController {
 		return "user/joinsuccess";
 	}
 	
+	// auth, logout -> spring-servlet.xml에서 확인
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
 		return "user/login";
@@ -50,13 +51,6 @@ public class UserController {
 	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(UserVo userVo, @AuthUser UserVo authUser) {
-//		// Access Control
-//		UserVo authUser = (UserVo)session.getAttribute("authUser");  // authUser의 정보를 써야해서 필요함
-//		if(authUser == null) {										 // authUser도 변수로 받기 위해 위를 활용
-//			return "redirect:/";
-//		}
-//		//////////////////
-		
 		userVo.setNo(authUser.getNo());
 		userService.updateUser(userVo);
 		

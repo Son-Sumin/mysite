@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bitacademy.mysite.security.Auth;
+import com.bitacademy.mysite.security.AuthUser;
 import com.bitacademy.mysite.service.BoardService;
 import com.bitacademy.mysite.vo.BoardVo;
 import com.bitacademy.mysite.vo.UserVo;
@@ -19,7 +21,7 @@ public class BoardController {
 	
 	@RequestMapping({"", "/list"})
 	public String list(Model model) {
-		model.addAttribute("list", boardService.findContentsList(1));
+		model.addAttribute("list", boardService.getContentsList());
 		return "board/list";
 	}
 	
@@ -35,15 +37,14 @@ public class BoardController {
 	}
 
 	@RequestMapping({"/delete/{no}"})
-	public String delete(
-			@PathVariable("no") Long no,
-			@PathVariable("userNo") Long userNo) {
+	public String delete(@PathVariable("no") Long no, Long userNo) {
 		boardService.deleteContents(no, userNo);
 		return "redirect:/board";
 	}
 	
 	@RequestMapping({"/view/{no}"})
-	public String view(@PathVariable("no") Long no) {
+	public String view(@PathVariable("no") Long no, Model model) {
+		model.addAttribute("no", no);
 		boardService.findContents(no);		
 		return "board/view";
 	}
@@ -63,5 +64,11 @@ public class BoardController {
 	public String reply() {
 		return "board/reply";
 	}
+	
+//	@RequestMapping({"", "/list"})
+//	public String list(Model model) {
+//		model.addAttribute("list", boardService.findContentsList());
+//		return "board/list";
+//	}
 	
 }

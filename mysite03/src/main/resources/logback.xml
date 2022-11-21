@@ -10,7 +10,7 @@
 		</encoder>
 	</appender>
 
-	<appender name="fileAppender2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>/mysite-logs/exception.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>

@@ -35,27 +35,9 @@ public class UserController {
 		return "user/joinsuccess";
 	}
 	
-	@RequestMapping(value="/auth", method=RequestMethod.GET)
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
 		return "user/login";
-	}
-	
-	@RequestMapping(value="/login", method=RequestMethod.POST)  //HttpSession; Spring의 취지에 맞게 controller 밖에서 제어하기
-	public String login(HttpSession session, UserVo userVo, Model model) {
-		UserVo authUser = userService.findUser(userVo);
-		if(authUser == null) {
-			model.addAttribute("email", userVo.getEmail());
-			return"user/login";
-		}
-		session.setAttribute("authUser", authUser);
-		return "redirect:/";
-	}
-	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {	
-		session.removeAttribute("authUser");
-		session.invalidate();
-		return "redirect:/";
 	}
 	
 	@Auth

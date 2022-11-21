@@ -18,18 +18,23 @@ public class AuthInterceptor implements HandlerInterceptor {
 			Object handler)
 			throws Exception {
 		
-		// 1. casting
+		// 1. handler 종류 확인
+		// '<mvc:exclude-mapping path="/assets/**"/>' 이 spring-servlet에 없을 경우 대비
+		if(handler instanceof HandlerMethod == false) {
+			return true;
+		}
+		// 2. casting
 		HandlerMethod handlerMethod = (HandlerMethod)handler;
 		
-		// 2. Handler Method의 @Auth를 받아오기
+		// 3. Handler Method의 @Auth를 받아오기
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 		
-		// 3. Handler Method에 @Auth가 없다면...(인증이 필요없다는 의미)
+		// 4. Handler Method에 @Auth가 없다면...(인증이 필요없다는 의미)
 		if(auth == null) {
 			return true;
 		}
 		
-		// 4. @Auth가 붙어있기 때문에 인증(Authentification) 여부 확인
+		// 5. @Auth가 붙어있기 때문에 인증(Authentification) 여부 확인
 		HttpSession session = request.getSession();
 		if(session == null) {
 			response.sendRedirect(request.getContextPath() + "/user/login");
@@ -42,7 +47,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		
-		// 5. @Auth도 붚어있고, 인증도 되어있다 -> 접근!(Controller 실행)
+		// 6. @Auth도 붚어있고, 인증도 되어있다 -> 접근!(Controller 실행)
 		return true;
 	}
 

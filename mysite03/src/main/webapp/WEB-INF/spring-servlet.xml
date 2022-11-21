@@ -12,7 +12,12 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<!-- Argument Resolver -->
+		<mvc:argument-resolvers>
+			<bean class="com.bitacademy.mysite.security.AuthUserHandlerMethodArgumentResolver"/>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 	
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler/>
@@ -20,7 +25,7 @@
 	<!-- interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/auth" />  <!-- **; 모든경로 의미 -->
+			<mvc:mapping path="/user/auth" />
 			<bean class="com.bitacademy.mysite.security.LoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
@@ -28,7 +33,7 @@
 			<bean class="com.bitacademy.mysite.security.LogoutInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+			<mvc:mapping path="/**" />   <!-- **; 모든경로 의미 -->
 			<mvc:exclude-mapping path="/user/auth"/>  <!-- /** 중 @auth 제외할 것들 -->
 			<mvc:exclude-mapping path="/user/logout"/>
 			<mvc:exclude-mapping path="/assets/**"/>

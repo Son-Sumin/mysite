@@ -36,6 +36,7 @@
 primary key를 null이 아닌 직접 insert로 사용하고 싶을 때
    => <selectKey> 활용! primary key를 사용할 때만 사용
 
+아래와 같은 상황이면
 class AuthorService{
 	deleteAuthor(no) {
 	}
@@ -43,8 +44,7 @@ class AuthorService{
 
 class BookService{
 
-	<트랜잭션 사용(thread / javastudy 참고)>
-	registerBook(bookVo, authorVo){
+	registerBook(bookVo, authorVo){         -> 트랜잭션 사용(thread / javastudy 참고)
 		
 		authorRepository.insert(authorVo);
 		

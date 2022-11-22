@@ -43,12 +43,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping({"/view/{no}"})
-	public String view(@PathVariable("no") Long no, BoardVo boardVo, Model model) {
-		boardService.findContents(no);
+	public String view(@PathVariable("no") Long no, Model model) {
+		BoardVo boardVo = boardService.findContents(no);
 		model.addAttribute("no", no);
 		model.addAttribute("boardVo", boardVo);
 		return "board/view";
 	}
+	
+//	@RequestMapping({"/view/{no}"})
+//	public String view(@PathVariable("no") Long no, BoardVo boardVo, Model model) {
+//		model.addAttribute("boardVo", boardService.findContents(no));
+//		return "board/view";
+//	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
 	public String modify() {

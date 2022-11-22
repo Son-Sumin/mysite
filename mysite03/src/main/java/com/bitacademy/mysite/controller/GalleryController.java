@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bitacademy.mysite.service.FileUploadService;
 import com.bitacademy.mysite.service.GalleryService;
+import com.bitacademy.mysite.vo.GalleryVo;
 
 @Controller
 @RequestMapping("/gallery")
@@ -28,12 +29,16 @@ public class GalleryController {
 	
 	@RequestMapping("/upload")
 	public String upload(
-			@RequestParam("comments") String comments,
 			@RequestParam("file") MultipartFile multipartFile,
+			GalleryVo galleryVo,
 			Model model) {
 		String url = fileUploadService.restore(multipartFile);
+		
+		galleryVo.setUrl(url);
+		galleryService.saveImages(galleryVo);
+		
 		model.addAttribute("url", url);
-		//galleryService.saveImages(galleryVo);
+		model.addAttribute("galleryVo", galleryVo);
 		return "redirect:/gallery";
 	}
 	

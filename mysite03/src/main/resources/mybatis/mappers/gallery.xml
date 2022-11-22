@@ -6,7 +6,7 @@
 		<![CDATA[
 		select no, url, comments
 		  from gallery
-		order by no desc
+	  order by no desc
 		]]>
 	</select>
 	
@@ -14,7 +14,7 @@
 		<![CDATA[
 		insert
 		  into gallery
-		 values(null, #{url }, #{comments }
+		 values(null, #{url }, #{comments })
 		]]>
 		<selectKey keyProperty="no" resultType="long" order="AFTER">
 			<![CDATA[
@@ -23,7 +23,7 @@
 		</selectKey>
 	</insert>
 
-	<delete id="deleteByNo" parameterType="galleryvo">
+	<delete id="deleteByNo" parameterType="long">
 		<![CDATA[
 		delete
 		  from gallery

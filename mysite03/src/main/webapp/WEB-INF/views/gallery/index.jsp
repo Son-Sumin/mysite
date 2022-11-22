@@ -53,14 +53,14 @@ $(function(){
 					<a href="" id="upload-image">이미지 올리기</a>
 				</div>
 				<ul>
-					<c:forEach var='vo' items="${list }">
+					<c:forEach var='galleryVo' items="${list }">
 					<li>
 						<a	href="${pageContext.request.contextPath }${url }"
 							data-lightbox="gallery"
 							class="image"
 							style="background-image:url('${pageContext.request.contextPath }${url }')">&nbsp;</a>
 							
-						<a	href="${pageContext.request.contextPath }/gallery/delete/${vo.no }"
+						<a	href="${pageContext.request.contextPath }/gallery/delete/${galleryVo.no }"
 							class="del-button"
 							title="삭제">삭제</a>
 					</li>

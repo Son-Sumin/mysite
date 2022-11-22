@@ -24,7 +24,7 @@ public class GalleryRepository {
 
 	public Boolean deleteByNo(Long no) {
 		int count = sqlSession.selectOne("gallery.deleteByNo", no);
-		return count ==1;
+		return count == 1;
 	}
 	
 }

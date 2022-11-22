@@ -12,6 +12,10 @@ import com.bitacademy.mysite.vo.GalleryVo;
 public class GalleryService {
 	@Autowired
 	private GalleryRepository galleryRepository;
+	
+	public List<GalleryVo> getContentsList() {
+		return galleryRepository.findAll();
+	}
 
 	public void saveImages(GalleryVo galleryVo) {
 		galleryRepository.insert(galleryVo);
@@ -20,8 +24,5 @@ public class GalleryService {
 	public void removeImages(Long no) {
 		galleryRepository.deleteByNo(no);
 	}
-	
-	public List<GalleryVo> getContentsList() {
-		return galleryRepository.findAll();
-	}
+
 }

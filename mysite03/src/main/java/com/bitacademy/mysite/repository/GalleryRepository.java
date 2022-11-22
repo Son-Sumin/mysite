@@ -23,7 +23,7 @@ public class GalleryRepository {
 	}
 
 	public Boolean deleteByNo(Long no) {
-		int count = sqlSession.selectOne("gallery.deleteByNo", no);
+		int count = sqlSession.delete("gallery.deleteByNo", no);
 		return count == 1;
 	}
 	

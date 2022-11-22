@@ -35,10 +35,10 @@
 				<!-- authUser no와 userVo no 같게 하기 -->
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath }/board">글목록</a>
-					<c:if test="${not empty authUser}">
-						<c:if test="${authUser.name == param.name }">
-								<a href="${pageContext.request.contextPath }/board/modify/${param.no }">글수정</a>
-						</c:if>
+					<c:if test="${authUser.no == boardVo.userNo}">	
+						<a href="${pageContext.request.contextPath }/board/modify/${no }">글수정</a>
+					</c:if>
+					<c:if test="${not empty authUser}">						
 						<a href="${pageContext.request.contextPath }/board/relpy">답글</a>
 					</c:if>
 				</div>

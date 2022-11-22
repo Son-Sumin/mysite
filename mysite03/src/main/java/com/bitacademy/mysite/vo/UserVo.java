@@ -1,12 +1,29 @@
 package com.bitacademy.mysite.vo;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 public class UserVo {
 	private Long no;
+	
+	@NotEmpty
+	@Length(min=2, max=5)
 	private String name;
+	
+	@NotEmpty
+	@Email
 	private String email;
+	
+	@NotEmpty
+	@Length(min=4,max=16)
 	private String password;
+	
+	// @RegEx("")    정규표현식; 문자열을 표현함  ex. [0-9a-zA-Z]
 	private String gender;
 	private String regDate;
+	
 	public Long getNo() {
 		return no;
 	}

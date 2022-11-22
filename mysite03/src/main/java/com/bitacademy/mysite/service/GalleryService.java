@@ -16,6 +16,6 @@ public class GalleryService {
 	}
 	
 	public void removeImages(Long no) {
-		galleryRepository.delete(no);
+		galleryRepository.deleteByNo(no);
 	}
 }

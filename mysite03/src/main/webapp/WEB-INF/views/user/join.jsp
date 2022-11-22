@@ -17,6 +17,8 @@
 		<div id="content">
 			<div id="user">
 
+				<!-- UserController /join(GET) parameter로 비어있는 '@ModelAttribute UserVo userVo'라도 부여를 하여
+				 'modelAttribute="userVo"' 추가 후 사용-->
 				<form:form
 					modelAttribute="userVo"
 					id="join-form" 
@@ -26,13 +28,11 @@
 					
 					 <!-- 다국어버전 가능(로케일 활용) -->
 					<label class="block-label" for="name"><spring:message code="Join.form.label.name" /></label>
-					<form:input path="name" />
+					<form:input path="name" />                                 <!-- = <input id="name" name="name" type="text" value=""/> -->
 					<p style="text-align: left; padding: 2px 0 2px 0; color: red">
-						<!-- /join에서 에러 발생시 해당 코드 실행됨 -->
-						<spring:hasBindErrors name="userVo">
-							<c:if test="${errors.hasFieldErrors('name') }">
-								 <!-- name이라는 필드에 에러가 있으면 defaultMessage 띄우기-->
-								<spring:message
+						<spring:hasBindErrors name="userVo">                   <!-- /join에서 에러 발생시 해당 코드 실행됨 -->
+							<c:if test="${errors.hasFieldErrors('name') }">    <!-- name이라는 필드에 에러가 있으면 defaultMessage 띄우기-->
+								<spring:message         
 									code="${errors.getFieldError('name').codes[0] }"
 									text="${errors.getFieldError('name').defaultMessage }" />
 							</c:if>
@@ -48,12 +48,13 @@
 					
 					<label class="block-label">패스워드</label>
 					<form:password path="password" />
-								<p style="text-align: left; padding: 2px 0 2px 0; color: red">
+					<p style="text-align: left; padding: 2px 0 2px 0; color: red">
 						<spring:hasBindErrors name="userVo">
 							<c:if test="${errors.hasFieldErrors('password') }">
 								<spring:message code="${errors.getFieldError('password').codes[0] }" />
 							</c:if> 
 						</spring:hasBindErrors>
+						<!-- = <form:errors path="password" /> -->
 					</p>
 					
 					<fieldset>

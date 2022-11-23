@@ -37,6 +37,10 @@ public class BoardService {
 		return boardRepository.findAll();
 	}
 	
+	public void updateHit(Long no) {
+		boardRepository.updateHit(no);
+	}
+	
 //	public Map<String, Object> findContentsList(int currentPage) {
 //		// view의 페이징을 처리하기 위한 데이터의 값 계산
 //		int beginPage = 0;

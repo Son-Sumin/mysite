@@ -33,8 +33,8 @@ public class BoardController {
 	
 	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String write(BoardVo vo) {
-		boardService.addContents(vo);
+	public String write(BoardVo boardVo) {
+		boardService.addContents(boardVo);
 		return "redirect:/board";
 	}
 
@@ -46,8 +46,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping({"/view/{no}"})
-	public String view(@PathVariable("no") Long no, Model model) {
+	public String view(
+			@PathVariable("no") Long no,
+			Model model) {
 		BoardVo boardVo = boardService.findContents(no);
+		boardService.updateHit(no);
+		
 		model.addAttribute("no", no);
 		model.addAttribute("boardVo", boardVo);
 		return "board/view";
@@ -78,15 +82,17 @@ public class BoardController {
 	}
 	
 	@Auth
-	@RequestMapping(value="/reply", method=RequestMethod.GET)
-	public String reply() {
+	@RequestMapping(value="/reply/{no}", method=RequestMethod.GET)
+	public String reply(
+			@PathVariable("no") Long no,
+			@ModelAttribute BoardVo boardVo) {
 		return "board/reply";
 	}
 	
 	@Auth
-	@RequestMapping(value="/reply", method=RequestMethod.POST)
+	@RequestMapping(value="/reply/{no}", method=RequestMethod.POST)
 	public String reply(BoardVo boardVo) {
-		boardService.updateContents(boardVo);
+		boardService.addContents(boardVo);
 		return "redirect:/board";
 	}
 	

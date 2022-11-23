@@ -16,7 +16,7 @@
 	 	<![CDATA[
 	 	insert 
 	 	  into board 
-	 	values(null, #{title }, #{contents }, 1, date_format(now(), '%Y/%m/%d %H:%i:%s'),
+	 	values(null, #{title }, #{contents }, 0, date_format(now(), '%Y/%m/%d %H:%i:%s'),
 					(select max(group_no))+1, 1, 0, #{userNo })
 	 	]]>
 	 	<selectKey keyProperty="no" resultType="long" order="AFTER">
@@ -28,7 +28,7 @@
 
 	<select id="findByNo" resultType="boardvo" parameterType="long">
 		 <![CDATA[
-		 select no, title, contents, hit, user_no as userNo
+		 select title, contents, hit, user_no as userNo
 		   from board
 		  where no = #{no }
 		 ]]>
@@ -46,6 +46,14 @@
 	 	<![CDATA[
 	 	update board
 	 	   set title=#{title }, contents=#{contents } where no=#{no }
+	 	]]>
+	</update>
+	
+	<update id="updateHit" parameterType="boardvo">
+	 	<![CDATA[
+	 	update board
+		   set hit = hit+1
+		 where no = #{no }
 	 	]]>
 	</update>
 </mapper>

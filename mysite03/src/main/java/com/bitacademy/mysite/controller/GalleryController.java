@@ -53,3 +53,13 @@ public class GalleryController {
 		return "redirect:/gallery";
 	}
 }
+
+/*
+ * 
+mysite pom > common fileupload 세팅
+spring-servlet >  MVC Resources Mapping, MultipartResolver 세팅
+FileUploadService URL 등 상황에 맞게 수정
+
+Vo - Controller -Service- Repo - mybatis(gallery.xml)순으로 작성
+configuration > mybatis(gallery.xml) 세팅
+ */

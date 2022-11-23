@@ -36,15 +36,14 @@ public class GalleryController {
 	@RequestMapping("/upload")
 	public String upload(
 			@RequestParam("file") MultipartFile multipartFile,
-			GalleryVo galleryVo,
-			Model model) {
+			GalleryVo galleryVo) {
 		String url = fileUploadService.restore(multipartFile);
 		
 		galleryVo.setUrl(url);
 		galleryService.saveImages(galleryVo);
 		
-		model.addAttribute("url", url);
-		model.addAttribute("galleryVo", galleryVo);
+		//model.addAttribute("url", url);
+		//model.addAttribute("galleryVo", galleryVo);
 		return "redirect:/gallery";
 	}
 	

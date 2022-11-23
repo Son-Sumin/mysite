@@ -25,17 +25,20 @@ public class BoardController {
 		return "board/list";
 	}
 	
+	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String write() {
 		return "board/write";
 	}
 	
+	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String write(BoardVo vo) {
 		boardService.addContents(vo);
 		return "redirect:/board";
 	}
 
+	@Auth
 	@RequestMapping({"/delete/{no}"})
 	public String delete(@PathVariable("no") Long no, Long userNo) {
 		boardService.deleteContents(no, userNo);
@@ -60,22 +63,31 @@ public class BoardController {
 	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
 	public String modify(
 			@PathVariable("no") Long no,
-			@ModelAttribute BoardVo boardVo,
-			@AuthUser BoardVo authUser) {
-		boardVo = boardService.findContents(no, authUser.getNo());
+			@ModelAttribute BoardVo boardVo) {
+		boardVo = boardService.findContents(no, boardVo.getUserNo());
+	
+		System.out.println(boardVo);
 		return "board/modify";
 	}
 	
 	@Auth
 	@RequestMapping(value="/modify/{no}", method=RequestMethod.POST)
-	public String modify(BoardVo vo, @AuthUser BoardVo authUser) {
-		boardService.updateContents(vo);
+	public String modify(@ModelAttribute BoardVo boardVo) {
+		boardService.updateContents(boardVo);
 		return "redirect:/board";
 	}
 	
+	@Auth
 	@RequestMapping(value="/reply", method=RequestMethod.GET)
 	public String reply() {
 		return "board/reply";
+	}
+	
+	@Auth
+	@RequestMapping(value="/reply", method=RequestMethod.POST)
+	public String reply(BoardVo boardVo) {
+		boardService.updateContents(boardVo);
+		return "redirect:/board";
 	}
 	
 //	@RequestMapping({"", "/list"})

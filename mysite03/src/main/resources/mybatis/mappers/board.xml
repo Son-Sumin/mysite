@@ -28,7 +28,7 @@
 
 	<select id="findByNo" resultType="boardvo" parameterType="long">
 		 <![CDATA[
-		 select title, contents, hit, user_no 
+		 select no, title, contents, hit, user_no as userNo
 		   from board
 		  where no = #{no }
 		 ]]>

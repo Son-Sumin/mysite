@@ -23,6 +23,7 @@ public class UserVo {
 	// @RegEx("")    정규표현식; 문자열을 표현함  ex. [0-9a-zA-Z]
 	private String gender;
 	private String regDate;
+	private String role;
 	
 	public Long getNo() {
 		return no;
@@ -60,11 +61,15 @@ public class UserVo {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
-				+ gender + ", regDate=" + regDate + "]";
-	}
-		
+				+ gender + ", regDate=" + regDate + ", role=" + role + "]";
+	}	
 }

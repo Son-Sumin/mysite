@@ -30,7 +30,7 @@ public @interface Auth {
 /*
  * 위는 '인증' 실시 중
  * 
- * 보안 = 인증(Authentification) + 권한(Authorization)
+ * 보안 = 인증(Authentification-login) + 권한(Authorization-role)
  * 
  * 보안 = 인프라(네트워크, 서버, 소프트웨어[보안+권한])
  */

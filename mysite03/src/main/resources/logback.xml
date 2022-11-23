@@ -34,7 +34,7 @@
     </logger>
 	
 	<!-- 루트(글로벌) 로거; 특별히 관심 있는 로그들은 위와 같이 아니면 이처럼 기본 설정하여 로그 확인 -->
-	<root level="debug">
+	<root level="info">
 		<appender-ref ref="consoleAppender" />
 	</root>
 

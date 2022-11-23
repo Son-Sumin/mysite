@@ -17,14 +17,12 @@ public class GalleryRepository {
 		return sqlSession.selectList("gallery.findAll");
 	}
 
-	public Boolean insert(GalleryVo galleryVo) {
-		int count = sqlSession.insert("gallery.insert", galleryVo);
-		return count == 1;
+	public void insert(GalleryVo galleryVo) {
+		sqlSession.insert("gallery.insert", galleryVo);
 	}
 
-	public Boolean deleteByNo(Long no) {
-		int count = sqlSession.delete("gallery.deleteByNo", no);
-		return count == 1;
+	public void deleteByNo(Long no) {
+		sqlSession.delete("gallery.deleteByNo", no);
 	}
 	
 }

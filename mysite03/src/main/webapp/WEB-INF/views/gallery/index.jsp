@@ -55,10 +55,10 @@ $(function(){
 				<ul>
 					<c:forEach var='galleryVo' items="${list }">
 					<li>
-						<a	href="${pageContext.request.contextPath }${url }"
+						<a	href="${pageContext.request.contextPath }${galleryVo.url }"
 							data-lightbox="gallery"
 							class="image"
-							style="background-image:url('${pageContext.request.contextPath }${url }')">&nbsp;</a>
+							style="background-image:url('${pageContext.request.contextPath }${galleryVo.url }')">&nbsp;</a>
 							
 						<a	href="${pageContext.request.contextPath }/gallery/delete/${galleryVo.no }"
 							class="del-button"

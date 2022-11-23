@@ -14,7 +14,7 @@
 		<![CDATA[
 		insert
 		  into gallery
-		 values(null, #{url }, #{comments })
+		values(null, #{url }, #{comments })
 		]]>
 		<selectKey keyProperty="no" resultType="long" order="AFTER">
 			<![CDATA[
@@ -29,5 +29,5 @@
 		  from gallery
 		 where no = #{no }
 		]]>
-	</delete>
+	</delete>  <!-- long 객체 안에 값이므로 #{아무거나 } -->
 </mapper>

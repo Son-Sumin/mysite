@@ -13,7 +13,7 @@ public class GalleryService {
 	@Autowired
 	private GalleryRepository galleryRepository;
 	
-	public List<GalleryVo> getContentsList() {
+	public List<GalleryVo> getImageList() {
 		return galleryRepository.findAll();
 	}
 
@@ -23,6 +23,7 @@ public class GalleryService {
 	
 	public void removeImages(Long no) {
 		galleryRepository.deleteByNo(no);
+		// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+ no);
 	}
 
 }

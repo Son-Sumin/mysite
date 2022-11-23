@@ -3,6 +3,7 @@ package com.bitacademy.mysite.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +12,6 @@ import com.bitacademy.mysite.security.Auth;
 import com.bitacademy.mysite.security.AuthUser;
 import com.bitacademy.mysite.service.BoardService;
 import com.bitacademy.mysite.vo.BoardVo;
-import com.bitacademy.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/board")
@@ -56,13 +56,19 @@ public class BoardController {
 //		return "board/view";
 //	}
 	
-	@RequestMapping(value="/modify", method=RequestMethod.GET)
-	public String modify() {
+	@Auth
+	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
+	public String modify(
+			@PathVariable("no") Long no,
+			@ModelAttribute BoardVo boardVo,
+			@AuthUser BoardVo authUser) {
+		boardVo = boardService.findContents(no, authUser.getNo());
 		return "board/modify";
 	}
 	
+	@Auth
 	@RequestMapping(value="/modify/{no}", method=RequestMethod.POST)
-	public String modify(BoardVo vo) {
+	public String modify(BoardVo vo, @AuthUser BoardVo authUser) {
 		boardService.updateContents(vo);
 		return "redirect:/board";
 	}

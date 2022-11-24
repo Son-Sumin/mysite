@@ -13,11 +13,16 @@
 	</select>
 
 	<insert id="insert" parameterType="boardvo">
+		<selectKey keyProperty="groupNo" resultType="long" order="BEFORE">
+	 		<![CDATA[
+	 		select max(group_no)+1 from board
+	 		]]>
+	 	</selectKey>
 	 	<![CDATA[
 	 	insert 
 	 	  into board 
 	 	values(null, #{title }, #{contents }, 0, date_format(now(), '%Y/%m/%d %H:%i:%s'),
-					(select max(group_no))+1, 1, 0, #{userNo })
+					#{groupNo }, 1, 0, #{userNo })
 	 	]]>
 	 	<selectKey keyProperty="no" resultType="long" order="AFTER">
 	 		<![CDATA[

@@ -36,6 +36,7 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 	
 	<!-- MyBatis SqlSessionTemplate -->
 	<!-- 위의 객체(Connection pool DataSource)를 아래에 생성자로 DI시키는 중, 위id = ref -->
+	<!-- 수동으로 빈 설정 (DI활용) -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>

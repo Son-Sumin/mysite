@@ -51,9 +51,9 @@ public class BoardController {
 			Model model) {
 		BoardVo boardVo = boardService.findContents(no);
 		boardService.updateHit(no);
-		
-		model.addAttribute("no", no);
+
 		model.addAttribute("boardVo", boardVo);
+		System.out.println("++++++++++++++++++++++++++"+boardVo);
 		return "board/view";
 	}
 	
@@ -86,6 +86,9 @@ public class BoardController {
 	public String reply(
 			@PathVariable("no") Long no,
 			@ModelAttribute BoardVo boardVo) {
+		boardVo = boardService.findContents(no);
+		
+		System.out.println("++++++++++++++++++++++++++"+boardVo);
 		return "board/reply";
 	}
 	

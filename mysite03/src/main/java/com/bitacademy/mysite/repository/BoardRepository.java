@@ -23,7 +23,6 @@ public class BoardRepository {
 	}
 
 	public BoardVo findByNo(Long no) {
-		//sqlSession.update("board.updateHit", no);
 		return sqlSession.selectOne("board.findByNo", no);
 	}
 

@@ -2,6 +2,7 @@ package com.bitacademy.mysite.config.app;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,7 +23,7 @@ public class MyBatisConfig {
 	}
 	
 	@Bean
-	public Sqlsession sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+	public SqlSession sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 }

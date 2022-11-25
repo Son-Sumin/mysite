@@ -94,8 +94,12 @@ public class BoardController {
 	
 	@Auth
 	@RequestMapping(value="/reply/{no}", method=RequestMethod.POST)
-	public String reply(BoardVo boardVo) {
+	public String reply(@PathVariable("no") Long no) {
+		BoardVo boardVo = boardService.findContents(no);
+		//boardVo.setOrderNo(boardVo.getOrderNo() +1);
+		//boardVo.setDepth(boardVo.getDepth() +1);
 		boardService.addContents(boardVo);
+		System.out.println("==============================="+boardVo);
 		return "redirect:/board";
 	}
 	

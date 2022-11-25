@@ -39,7 +39,7 @@
 						<a href="${pageContext.request.contextPath }/board/modify/${no }">글수정</a>	
 					</c:if>
 					<c:if test="${not empty authUser}">		
-						<a href="${pageContext.request.contextPath }/board/relpy/${no }">답글</a>
+						<a href="${pageContext.request.contextPath }/board/reply/${no }">답글</a>
 					</c:if>
 				</div>
 			</div>

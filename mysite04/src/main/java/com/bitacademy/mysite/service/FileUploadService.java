@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,8 +16,12 @@ import com.bitacademy.mysite.exception.FileUploadServiceException;
 
 @Service
 public class FileUploadService {
-	private static String RESTORE_PATH = "/mysite-uploads";
-	private static String URL_BASE = "/gallery/images"; 
+	
+	@Autowired
+	private Environment env;
+	
+	//private static String RESTORE_PATH = "/mysite-uploads";
+	//private static String URL_BASE = "/gallery/images"; 
 	 // 서버 위에서 실행되므로 파일(저장 디렉토리)은 tomcat 외부에 저장해야함 (내 디렉토리와 서버 디렉토리는 당연히 다름)
 	 // 위와 같이 하면 URL을 딸 수 없음 -> 가상의 URL과 매핑하기(spring-servlet에서 resource mapping 설정 필요)
 
@@ -27,7 +33,7 @@ public class FileUploadService {
 				return url;
 			}
 			
-			File restoreDirectory = new File(RESTORE_PATH);
+			File restoreDirectory = new File(env.getProperty("fileupload.resourceMapping"));
 			if(!restoreDirectory.exists()) {
 				restoreDirectory.mkdirs();
 			}
@@ -42,11 +48,11 @@ public class FileUploadService {
 			System.out.println("#########" + fileSize);
 			byte[] data = multipartFile.getBytes();
 			
-			OutputStream os = new FileOutputStream(RESTORE_PATH + "/"+ restoreFilename);
+			OutputStream os = new FileOutputStream(env.getProperty("fileupload.resourceMapping") + "/"+ restoreFilename);
 			os.write(data);
 			os.close();
 			
-			url = URL_BASE + "/" + restoreFilename;
+			url = env.getProperty("fileupload.uploadLocation") + "/" + restoreFilename;
 		} catch (IOException e) {
 			throw new FileUploadServiceException(e.toString());
 		}

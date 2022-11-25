@@ -14,9 +14,7 @@
 	<!-- MVC Resources Mapping -->
 	<mvc:resources mapping="/gallery/images/**" location="file:/mysite-uploads/" />
 	
-	
-	<!-- auto proxy  -->
-	<aop:aspectj-autoproxy />
+
 	
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
@@ -74,19 +72,6 @@
 		<!-- defaultEncoding -->
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
-	
-	<!-- Annotation Configuration: Auto Bean scanning(자동 빈 스캐닝) -->	
-	<context:annotation-config />
-	<context:component-scan base-package="com.bitacademy.mysite.controller, com.bitacademy.mysite.exception" />
+
 
 </beans>
-
-<!-- DefaultServlet
- Tomcat에서 DefaultServlet이 정적자원의 URL을 처리해준다.
-
- mysite02까지 DispatcherServlet(URL /)이 UI처리
- mysite03(Spring)부터는 DispatcherServlet보다 기저인 DefaultServlet이 UI처리
- HandlerMapping에 기본값- DefaultServlet 설정
-
- DispatcherServlet 이 모든 URL처리에 서블릿 매핑을 하였기 때문에 톰캣은 정적 자원에 대한 URL처리도
- DispatcherServlet에게 넘기기 때문이다. ( 즉, DefaultServlet에 위임을 하지 못한다. )  -->

@@ -53,7 +53,7 @@ public class BoardController {
 		boardService.updateHit(no);
 
 		model.addAttribute("boardVo", boardVo);
-		System.out.println("++++++++++++++++++++++++++"+boardVo);
+		//System.out.println("++++++++++++++++++++++++++"+boardVo);
 		return "board/view";
 	}
 	
@@ -88,18 +88,20 @@ public class BoardController {
 			@ModelAttribute BoardVo boardVo) {
 		boardVo = boardService.findContents(no);
 		
-		System.out.println("++++++++++++++++++++++++++"+boardVo);
+		System.out.println("+++++++++++가져오기++++++++++"+boardVo);
 		return "board/reply";
 	}
 	
 	@Auth
 	@RequestMapping(value="/reply/{no}", method=RequestMethod.POST)
-	public String reply(@PathVariable("no") Long no) {
+	public String reply(@PathVariable("no") Long no, Model model) {
 		BoardVo boardVo = boardService.findContents(no);
-		//boardVo.setOrderNo(boardVo.getOrderNo() +1);
-		//boardVo.setDepth(boardVo.getDepth() +1);
+		boardVo.setOrderNo(boardVo.getOrderNo() +1);
+		boardVo.setDepth(boardVo.getDepth() +1);
+		
 		boardService.addContents(boardVo);
-		System.out.println("==============================="+boardVo);
+		model.addAttribute("boardVo", boardVo);
+		System.out.println("=========reply======================"+boardVo);
 		return "redirect:/board";
 	}
 	

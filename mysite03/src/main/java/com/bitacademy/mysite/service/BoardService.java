@@ -41,6 +41,10 @@ public class BoardService {
 		boardRepository.updateHit(no);
 	}
 	
+	public boolean updateGroupOrderNo(BoardVo boardVo) {
+		return boardRepository.updateOrderNo(boardVo.getGroupNo(), boardVo.getOrderNo());
+	}
+	
 //	public Map<String, Object> findContentsList(int currentPage) {
 //		// view의 페이징을 처리하기 위한 데이터의 값 계산
 //		int beginPage = 0;

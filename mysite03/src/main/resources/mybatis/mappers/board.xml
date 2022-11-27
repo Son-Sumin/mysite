@@ -24,8 +24,15 @@
 	 	<![CDATA[
 	 	insert 
 	 	  into board 
-	 	values(null, #{title }, #{contents }, 0, date_format(now(), '%Y/%m/%d %H:%i:%s'),
-					(select ifnull(max(group_no), 1))+1, 1, 0, #{userNo })
+	 	values(null,
+	 	       #{title },
+	 	       #{contents },
+	 	       0,
+	 	       date_format(now(), '%Y/%m/%d %H:%i:%s'),
+	 	       (select ifnull(max(group_no), 1))+1,
+	 	       1,
+	 	       0,
+	 	       #{userNo })
 	 	]]>
 	 	<selectKey keyProperty="no" resultType="long" order="AFTER">
 	 		<![CDATA[
@@ -76,9 +83,10 @@
 	
 	<update id="updateOrderNo" parameterType="map">
 	 	<![CDATA[
-	 	update board
-		   set 
-		 where 
+		update board
+		   set order_no = order_no + 1
+ 		where group_no = #{group_no }
+ 		  and order_no >= #{order_no };
 	 	]]>
 	</update>
 </mapper>

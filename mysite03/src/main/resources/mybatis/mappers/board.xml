@@ -73,4 +73,12 @@
 		 where no = #{no }
 	 	]]>
 	</update>
+	
+	<update id="updateOrderNo" parameterType="map">
+	 	<![CDATA[
+	 	update board
+		   set 
+		 where 
+	 	]]>
+	</update>
 </mapper>

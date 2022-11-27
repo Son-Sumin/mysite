@@ -42,7 +42,8 @@ public class BoardService {
 	}
 	
 	public boolean updateGroupOrderNo(BoardVo boardVo) {
-		return boardRepository.updateOrderNo(boardVo.getGroupNo(), boardVo.getOrderNo());
+		return false;
+		//return boardRepository.updateOrderNo(boardVo.getGroupNo(), boardVo.getOrderNo());
 	}
 	
 //	public Map<String, Object> findContentsList(int currentPage) {

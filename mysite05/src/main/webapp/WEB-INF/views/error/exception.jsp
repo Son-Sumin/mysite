@@ -9,6 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello World</h1>
+	<h1>Exception Occurs</h1>
+	<pre style="color:green"> <!-- 코드모양처럼 나오게 하는 tag -->
+		${exception }
+	</pre>
 </body>
 </html>
+
+<!-- 내가 만들 controller-service-repository 발생 에러 -->

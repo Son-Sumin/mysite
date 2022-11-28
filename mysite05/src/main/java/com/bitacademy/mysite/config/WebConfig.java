@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -20,9 +19,10 @@ import com.bitacademy.mysite.security.LoginInterceptor;
 import com.bitacademy.mysite.security.LogoutInterceptor;
 
 // FileuploadConfig + SecurityConfig
+// 해당 페이지는 못 없앤다 -> Spring Security 사용해야함
 
 @SpringBootConfiguration
-@PropertySource("web/fileupload.properties")
+@PropertySource("classpath:web/fileupload.properties")
 public class WebConfig implements WebMvcConfigurer {
 	@Autowired
 	private Environment env;
@@ -77,5 +77,4 @@ public class WebConfig implements WebMvcConfigurer {
 			.addResourceHandler(env.getProperty("fileupload.resourceMapping") + "/**")
 			.addResourceLocations("file:" + env.getProperty("fileupload.uploadLocation") + "/");
 	}
-
 }

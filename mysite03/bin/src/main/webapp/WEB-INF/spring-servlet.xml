@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- auto proxy  -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
+	<mvc:annotation-driven>
+		<!-- Argument Resolver -->
+		<mvc:argument-resolvers>
+			<bean class="com.bitacademy.mysite.security.AuthUserHandlerMethodArgumentResolver"/>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	
+	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth" />
+			<bean class="com.bitacademy.mysite.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.bitacademy.mysite.security.LogoutInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />   <!-- **; 모든경로 의미 -->
+			<mvc:exclude-mapping path="/user/auth"/>  <!-- /** 중 @auth 제외할 것들 -->
+			<mvc:exclude-mapping path="/user/logout"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.bitacademy.mysite.security.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- Message Source -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages_ko</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ViewResolver 설정 /WEB-INF/views/(view 이름).jsp -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />	
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="1" />
+	</bean>
+	
+	<!-- MVC Resources Mapping -->
+	<mvc:resources mapping="/gallery/images/**" location="file:/mysite-uploads/" />
+	
+	<!-- MultipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대업로드 가능한 바이트크기 -->
+		<property name="maxUploadSize" value="52428800" />
+		<!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
+		<!-- property name="maxInMemorySize" value="52428800" / -->
+		<!-- defaultEncoding -->
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+	
+	<!-- Annotation Configuration: Auto Bean scanning(자동 빈 스캐닝) -->	
+	<context:annotation-config />
+	<context:component-scan base-package="com.bitacademy.mysite.controller, com.bitacademy.mysite.exception" />
+
+</beans>
+
+<!-- DefaultServlet
+ Tomcat에서 DefaultServlet이 정적자원의 URL을 처리해준다.
+
+ mysite02까지 DispatcherServlet(URL /)이 UI처리
+ mysite03(Spring)부터는 DispatcherServlet보다 기저인 DefaultServlet이 UI처리
+ HandlerMapping에 기본값- DefaultServlet 설정
+
+ DispatcherServlet 이 모든 URL처리에 서블릿 매핑을 하였기 때문에 톰캣은 정적 자원에 대한 URL처리도
+ DispatcherServlet에게 넘기기 때문이다. ( 즉, DefaultServlet에 위임을 하지 못한다. )  -->

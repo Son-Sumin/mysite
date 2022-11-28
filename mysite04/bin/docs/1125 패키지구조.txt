@@ -1,0 +1,77 @@
+#1125
+# mysite03 -> mysite04 세팅
+
+**Root Application Context**
+	applicationContext.xml -> com.bitacademy.mysite.config.AppConfig
+			     -> com.bitacademy.mysite.config.app.DBConfig
+			     -> com.bitacademy.mysite.config.app.MyBatisConfig
+**Web Application Context**
+	spring-servlet.xml -> com.bitacademy.mysite.config.WebConfig
+		             -> com.bitacademy.mysite.config.web.MvcConfig
+		             -> com.bitacademy.mysite.config.web.MessageConfig
+		             -> com.bitacademy.mysite.config.web.FileuploadConfig
+
+[src/main/java]
+com.bitacademy.mysite.config
+	|- AppConfig
+	|- WebConfig
+com.bitacademy.mysite.config.app
+	|- DBConfig
+	|- MyBatisConfig
+com.bitacademy.mysite.config.web
+	|- MVCConfig
+	|- SecurityConfig
+	|- FileuploadConfig
+	|- MessageResourceConfig
+
+[src/main/resource]
+com.bitacademy.mysite.config.app
+	|- jdbc.properties
+com.bitacademy.mysite.config.app.mybatis
+	|- configuration.xml
+com.bitacademy.mysite.config.app.mybatis.mappers
+	|- user.xml
+	|- board.xml
+	|-  ...
+
+com.bitacademy.mysite.config.web
+	|- fileupload.properties
+	|- messages_ko.properties
+
+[compile]
+com
+   |- /bitacademy
+           |- /mysite
+                    |- /config
+                          |- AppConfig.class
+                          |- WebConfig.class
+                          |- /web
+                          |	|-
+                          |- /app
+                                 |- DBConfig.class
+                                 |- MyBatisConfig.class
+                                 |- jdbc.properties
+                                 |- /mybatis
+                                          |- configuration.xml
+                                          |- /mappers
+                                                   |- user.xml
+                                                   |- board.xml
+
+
+new ClassPathXmlWebApplicationContext
+
+[web.xml - Context Parameters]
+context-param
+1. contextClass
+org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+
+2. contextConfigLocation
+com.bitacademy.mysite.config.AppConfig
+
+[web.xml - Dispatcher Servlet]
+init-param
+1. contextClass
+org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+
+2. contextConfigLocation
+com.bitacademy.mysite.config.WebConfig

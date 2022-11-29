@@ -9,7 +9,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 public class MessageResourceConfig {
 	
 	@Bean
-	public MessageSource ResourceBundleMessageSource() {
+	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasename("com/bitacademy/mysite/config/web/messages_ko");
 		messageSource.setDefaultEncoding("utf-8");

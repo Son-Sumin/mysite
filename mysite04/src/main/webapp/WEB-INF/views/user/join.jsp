@@ -27,7 +27,7 @@
 					action="${pageContext.request.contextPath }/user/join">
 					
 					 <!-- 다국어버전 가능(로케일 활용) -->
-					<label class="block-label" for="name"><spring:message code="Join.form.label.name"/></label>
+					<label class="block-label" for="name"><spring:message code="Join.form.label.name" text="..."/></label>
 					<form:input path="name" />                                 <!-- = <input id="name" name="name" type="text" value=""/> -->
 					<p style="text-align: left; padding: 2px 0 2px 0; color: red">
 						<spring:hasBindErrors name="userVo">                   <!-- /join에서 에러 발생시 해당 코드 실행됨 -->

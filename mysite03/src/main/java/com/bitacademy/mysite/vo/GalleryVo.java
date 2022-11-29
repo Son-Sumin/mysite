@@ -26,6 +26,5 @@ public class GalleryVo {
 	@Override
 	public String toString() {
 		return "GalleryVo [no=" + no + ", url=" + url + ", comments=" + comments + "]";
-	}
-	
+	}	
 }

@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 // Controller의 모든 메소드에 Exception 발생시 AOP를 활용한 ExceptionHandler 만듬
 
@@ -17,7 +18,14 @@ public class ControllerExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)  // AOP의 when 지정
 	public String HandlerException(Model model, Exception e) {
-		// 로깅
+		if(e instanceof NoHandlerFoundException) {
+			return "error/404";
+		}
+		
+		// 500 Error 처리
+		// bad request는 validation이 처리
+		
+		// 1. 로깅
 		StringWriter errors = new StringWriter();  // Stringbuffer 갖고 있는 StringWriter, 보조스트림
 		e.printStackTrace(new PrintWriter(errors));  // 주스트림  // 어떤 흐름, 어떤 메소드에서 발생했는지 알게끔
 		
@@ -31,7 +39,7 @@ public class ControllerExceptionHandler {
 		
 		Logger.error(errors.toString());
 		
-		// 사과 페이지(HTML 응답, 정상종료)
+		// 2. 사과 페이지(HTML 응답, 정상종료)
 		model.addAttribute("exception", errors.toString());	
 		return "error/exception";
 	}

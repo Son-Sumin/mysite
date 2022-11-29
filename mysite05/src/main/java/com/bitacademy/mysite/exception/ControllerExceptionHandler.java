@@ -18,6 +18,8 @@ public class ControllerExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)  // AOP의 when 지정
 	public String HandlerException(Model model, Exception e) {
+		
+		// 404 Error 처리
 		if(e instanceof NoHandlerFoundException) {
 			return "error/404";
 		}

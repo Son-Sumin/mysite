@@ -29,7 +29,7 @@
 	 	       #{contents },
 	 	       0,
 	 	       date_format(now(), '%Y/%m/%d %H:%i:%s'),
-	 	       (select ifnull(max(group_no), 0))+1 from board),
+	 	       (select ifnull(max(group_no), 0)+1 from board a),
 	 	       1,
 	 	       0,
 	 	       #{userNo })

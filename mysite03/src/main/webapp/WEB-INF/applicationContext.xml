@@ -22,7 +22,7 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 	<!-- repository conn 참고 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.136.117:3306/webdb?charset=utf8" />
+		<property name="url" value="jdbc:mysql://192.168.136.117:3306/webdb?charset=utf8" /> 
 		<property name="username" value="webdb" />
 		<property name="password" value="webdb" />
 	</bean>

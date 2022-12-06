@@ -25,9 +25,8 @@ public class ControllerExceptionHandler {
 		}
 		
 		// 500 Error 처리
-		// bad request는 validation이 처리
 		
-		// 1. 로깅
+		// 로깅
 		StringWriter errors = new StringWriter();  // Stringbuffer 갖고 있는 StringWriter, 보조스트림
 		e.printStackTrace(new PrintWriter(errors));  // 주스트림  // 어떤 흐름, 어떤 메소드에서 발생했는지 알게끔
 		
@@ -41,7 +40,7 @@ public class ControllerExceptionHandler {
 		
 		Logger.error(errors.toString());
 		
-		// 2. 사과 페이지(HTML 응답, 정상종료)
+		// 사과 페이지(HTML 응답, 정상종료)
 		model.addAttribute("exception", errors.toString());	
 		return "error/exception";
 	}

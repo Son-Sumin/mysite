@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bitacademy.mysite.exception.FileUploadServiceException;
 
 @Service
-@PropertySource("classpath:com/bitacademy/mysite/config/web/fileupload.properties")
+@PropertySource("classpath:web/fileupload.properties")
 public class FileUploadService {
 	
 	@Autowired

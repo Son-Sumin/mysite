@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 		<div id="navigation">
 			<ul>
-				<li><a href="${pageContext.request.contextPath }">안대혁</a></li>
+				<li><a href="${pageContext.request.contextPath }">짱구</a></li>
 				<li><a href="${pageContext.request.contextPath }/guestbook">방명록</a></li>
 				<li><a href="${pageContext.request.contextPath }/board">게시판</a></li>
 				<li><a href="${pageContext.request.contextPath }/gallery">갤러리</a></li>

@@ -4,6 +4,7 @@ public class GalleryVo {
 	private Long no;
 	private String url;
 	private String comments;
+	
 	public Long getNo() {
 		return no;
 	}

@@ -10,6 +10,22 @@
 		]]>
 	</select>
 	
+	<select id="findAllByNo" parameterType="long" resultType="guestbookvo">
+		<![CDATA[
+		  select no, name, contents, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regDate
+		    from guestbook
+		]]>
+		<if test="_parameter > 0">  <!-- 값으로 넘어올 때 반드시 _parameter 사용 -->
+			<![CDATA[
+		   where no < #{_parameter }
+		   ]]>
+		</if>
+		<![CDATA[
+		order by no desc
+		   limit 0, 5
+		]]>
+	</select>
+	
 	<insert id="insert" parameterType="guestbookvo">   <!-- #{필드명 } -->
 		<![CDATA[
 		insert

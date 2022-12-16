@@ -11,6 +11,54 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+var startNo = 0;
+var fetchList = function(){
+	$.ajax({
+		url: "${pageContext.request.contextPath }/guestbook/api/list/" + startNo, // get방식으로 할 때 뒤에 ? 또는  + $.param(formData)
+		async: true,   // 비동기할거임
+		type: "get",   // GET / POST
+		dataType: "json",
+		success: function(response){
+			console.log(response); // console에 5개씩 넘어오나 확인
+			
+			response.forEach(function(vo){
+				var htmls = 
+				"<li data-no='" + vo.no +"'>" +
+				"<strong>지나가다가</strong>" +
+				"<p>" + vo.contents.replace(/\n/gi, "<br>") + "<p>" +  // 정규표현식 사용해야함  /~/: 하나 /~/g : 모든 것  /~/gi: 대소문자 가리지말고 다
+				"<strong></strong>" +
+				"<a href='' data-no='"+ vo.no +"'>삭제</a> " +
+				"</li>";
+				$("#list-guestbook").append(htmls);
+			}); // 스크롤을 최대로 내려서 5개 리스트가 보여준 후 다음 리스트 보여주는 것만 해결하면 됨
+			
+			startNo = $("#list-guestbook li").last().data("no");
+			console.log(startNo);
+		},
+		error: function(xhr, status, error){
+			console.error(status, error);
+		}
+	});
+}
+
+$(function(){
+	$("#add-form").submit(function(event){
+		event.preventDefault();  // 방명록 insert 방식과 맞지 않으면 페이지 안 넘어감
+	});
+	$(window).scroll(function(){
+		var windowHeight = $(this).height();
+		var documentHeight = $(document).height();
+		var scrollTop = $(this).scrollTop();
+		
+		if(scrollTop + windowHeight + 10 > documentHeight){
+			fetchList();
+		}
+	});
+	// 최초 리스트 가져오기
+	fetchList();
+});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -24,39 +72,7 @@
 					<textarea id="tx-content" placeholder="내용을 입력해 주세요."></textarea>
 					<input type="submit" value="보내기" />
 				</form>
-				<ul id="list-guestbook">
-
-					<li data-no=''>
-						<strong>지나가다가</strong>
-						<p>
-							별루입니다.<br>
-							비번:1234 -,.-
-						</p>
-						<strong></strong>
-						<a href='' data-no=''>삭제</a> 
-					</li>
-
-					<li data-no=''>
-						<strong>둘리</strong>
-						<p>
-							안녕하세요<br>
-							홈페이지가 개 굿 입니다.
-						</p>
-						<strong></strong>
-						<a href='' data-no=''>삭제</a> 
-					</li>
-
-					<li data-no=''>
-						<strong>주인</strong>
-						<p>
-							아작스 방명록 입니다.<br>
-							테스트~
-						</p>
-						<strong></strong>
-						<a href='' data-no=''>삭제</a> 
-					</li>
-
-				</ul>
+				<ul id="list-guestbook"></ul>
 			</div>
 			<div id="dialog-delete-form" title="메세지 삭제" style="display:none">
   				<p class="validateTips normal">작성시 입력했던 비밀번호를 입력하세요.</p>

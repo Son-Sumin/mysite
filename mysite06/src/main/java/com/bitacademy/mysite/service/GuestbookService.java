@@ -17,6 +17,10 @@ public class GuestbookService {
 		return guestbookRepository.findAll();
 	}
 	
+	public List<GuestbookVo> getContentsList(Long startNo) {
+		return guestbookRepository.findAll(startNo);
+	}
+	
 	public void deleteContents(Long no,String password) {
 		guestbookRepository.deleteByNoAndPassword(no, password);
 	}

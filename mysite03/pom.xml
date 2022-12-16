@@ -51,6 +51,27 @@
 			<version>${org.springframework-version}</version>
 		</dependency>	
 		
+		<!-- Spring JDBC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>		
+		
+		<!-- validation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.3.Final</version>
+		</dependency>
+		
+		<!-- jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.2.2</version>
+		</dependency>
+		
 		<!-- common fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -61,20 +82,6 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.11.0</version>
-		</dependency>
-		
-		<!-- Spring JDBC -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		
-		<!-- validation -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>6.2.3.Final</version>
 		</dependency>
 
 		<!-- Aphche Common DBCP(Connection Pool) -->

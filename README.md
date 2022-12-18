@@ -1,5 +1,4 @@
-## mysite - Java Web Programming Examples
-***
+## mysite - Java Web Programming Examples***
    
 ### mysite02: Servlet API Based   
 
